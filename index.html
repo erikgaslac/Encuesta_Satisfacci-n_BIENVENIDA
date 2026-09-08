@@ -1,887 +1,1400 @@
-<!DOCTYPE html>
-<html lang="es" data-theme="auto">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Bienvenida Docente — IES 2026-III</title>
+<title>Bienvenida Docente 2026-IIIA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-/* ===== TOKENS ===== */
-:root {
-  --idat-c: #eb6834;
-  --idat-d: #d95926;
-  --zegel-c: #2a78d6;
-  --zegel-d: #3987e5;
-  --slate-c: #3c4a5e;
-  --slate-d: #8fa2bd;
-  --nps-good: #0ca30c;
-  --nps-warn: #d98a00;
-  --nps-crit: #d03b3b;
-  --accent:   #6d5ce8;
-  --pill-green-bg: #dcfce7; --pill-green-tx: #166534;
-  --pill-amber-bg: #fef3c7; --pill-amber-tx: #92400e;
-  --pill-red-bg:   #fee2e2; --pill-red-tx:   #991b1b;
-  --bg-page:   #f0f2f5;
-  --bg-card:   #ffffff;
-  --bg-card2:  #f8f9fb;
-  --tx-primary:#111827;
-  --tx-muted:  #6b7280;
-  --tx-faint:  #9ca3af;
-  --border:    #e5e7eb;
-  --shadow:    0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.05);
-  --radius:    10px;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg-page:   #0f1117;
-    --bg-card:   #1a1d27;
-    --bg-card2:  #1f2333;
-    --tx-primary:#f1f5f9;
-    --tx-muted:  #94a3b8;
-    --tx-faint:  #64748b;
-    --border:    #2d3348;
-    --shadow:    0 1px 4px rgba(0,0,0,.4);
-    --pill-green-bg: #14532d; --pill-green-tx: #86efac;
-    --pill-amber-bg: #78350f; --pill-amber-tx: #fde68a;
-    --pill-red-bg:   #7f1d1d; --pill-red-tx:   #fca5a5;
+  :root {
+    color-scheme: light;
+    --page:        #f5f4f0;
+    --surface:     #ffffff;
+    --surface-2:   #faf9f6;
+    --ink:         #14171a;
+    --ink-2:       #52565c;
+    --muted:       #8a8d93;
+    --border:      rgba(20,23,26,0.10);
+    --border-2:    rgba(20,23,26,0.16);
+
+    --zegel:       #2a78d6;
+    --zegel-soft:  #cde2fb;
+    --idat:        #eb6834;
+    --idat-soft:   #fbdbcb;
+
+    --neutral-bar: #3c4a5e;
+    --neutral-bar-soft: #dbe2ea;
+
+    --good:        #0ca30c;
+    --warning:     #d98a00;
+    --critical:    #d03b3b;
+
+    --seq-1: #cde2fb; --seq-2: #86b6ef; --seq-3: #3987e5; --seq-4: #1c5cab; --seq-5: #0d366b;
+
+    --shadow: 0 1px 2px rgba(20,23,26,0.04), 0 8px 24px -12px rgba(20,23,26,0.14);
+    --radius: 14px;
   }
-}
-:root[data-theme="dark"] {
-  --bg-page:   #0f1117;
-  --bg-card:   #1a1d27;
-  --bg-card2:  #1f2333;
-  --tx-primary:#f1f5f9;
-  --tx-muted:  #94a3b8;
-  --tx-faint:  #64748b;
-  --border:    #2d3348;
-  --shadow:    0 1px 4px rgba(0,0,0,.4);
-  --pill-green-bg: #14532d; --pill-green-tx: #86efac;
-  --pill-amber-bg: #78350f; --pill-amber-tx: #fde68a;
-  --pill-red-bg:   #7f1d1d; --pill-red-tx:   #fca5a5;
-}
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  background: var(--bg-page);
-  color: var(--tx-primary);
-  line-height: 1.55;
-}
-h1,h2,h3,.num-big,.num-med {
-  font-family: 'Sora', sans-serif;
-  font-variant-numeric: tabular-nums;
-}
-.num-big { font-size: 2.6rem; font-weight: 800; line-height: 1; }
-.num-med { font-size: 1.5rem; font-weight: 700; }
-* { font-variant-numeric: tabular-nums; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page:        #101113;
+      --surface:     #1a1c20;
+      --surface-2:   #1f2226;
+      --ink:         #f3f3f0;
+      --ink-2:       #b7bac0;
+      --muted:       #85888e;
+      --border:      rgba(255,255,255,0.10);
+      --border-2:    rgba(255,255,255,0.16);
 
-.page { max-width: 1200px; margin: 0 auto; padding: 24px 20px 48px; }
-.section { margin-bottom: 28px; }
+      --zegel:       #3987e5;
+      --zegel-soft:  #1c3f63;
+      --idat:        #d95926;
+      --idat-soft:   #5c3220;
 
-.grid-kpi   { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
-.grid-2     { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.grid-3     { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
-@media (max-width: 880px) {
-  .grid-kpi { grid-template-columns: repeat(2,1fr); }
-  .grid-2   { grid-template-columns: 1fr; }
-  .grid-3   { grid-template-columns: 1fr; }
-}
-@media (max-width: 480px) {
-  .grid-kpi { grid-template-columns: 1fr 1fr; }
-}
+      --neutral-bar: #8fa2bd;
+      --neutral-bar-soft: #2a3038;
 
-.header {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 20px 24px;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.header-left h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -.01em; }
-.header-left p  { color: var(--tx-muted); font-size: 12px; margin-top: 2px; }
-.header-right   { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-.badge-real {
-  background: #dcfce7; color: #166534;
-  border: 1px solid #bbf7d0;
-  padding: 4px 10px; border-radius: 20px;
-  font-size: 11px; font-weight: 600; letter-spacing: .02em;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .badge-real { background:#14532d; color:#86efac; border-color:#166534; }
-}
-:root[data-theme="dark"] .badge-real { background:#14532d; color:#86efac; border-color:#166534; }
-.badge-period {
-  background: var(--bg-card2);
-  border: 1px solid var(--border);
-  color: var(--tx-muted);
-  padding: 4px 10px; border-radius: 20px;
-  font-size: 11px; font-weight: 500;
-}
-.theme-btn {
-  background: var(--bg-card2);
-  border: 1px solid var(--border);
-  color: var(--tx-muted);
-  padding: 5px 10px; border-radius: 8px;
-  font-size: 12px; cursor: pointer;
-}
-.theme-btn:hover { color: var(--tx-primary); }
+      --good:        #0ca30c;
+      --warning:     #e0a52c;
+      --critical:    #e66767;
 
-/* ===== BARRA DE FILTROS ===== */
-.filter-bar {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 14px 18px;
-  margin-bottom: 20px;
-  box-shadow: var(--shadow);
-  display: flex;
-  align-items: flex-end;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.filter-group { display: flex; flex-direction: column; gap: 5px; min-width: 220px; }
-.filter-group label {
-  font-size: 11px; font-weight: 600; color: var(--tx-muted);
-  text-transform: uppercase; letter-spacing: .04em;
-}
-.filter-group select {
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--bg-card2);
-  color: var(--tx-primary);
-  cursor: pointer;
-  min-width: 220px;
-}
-.filter-group select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
-.filter-actions { display: flex; gap: 8px; margin-left: auto; }
-.btn {
-  font-family: 'Inter', sans-serif;
-  font-size: 13px; font-weight: 600;
-  padding: 9px 16px; border-radius: 8px;
-  border: 1px solid var(--border);
-  cursor: pointer;
-  display: inline-flex; align-items: center; gap: 6px;
-  transition: transform .1s ease, opacity .15s ease;
-}
-.btn:active { transform: scale(.97); }
-.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-.btn-primary:hover { opacity: .9; }
-.btn-primary[disabled] { opacity: .6; cursor: default; }
-.btn-ghost { background: var(--bg-card2); color: var(--tx-muted); }
-.btn-ghost:hover { color: var(--tx-primary); }
-.filter-status {
-  font-size: 11.5px; color: var(--tx-faint);
-  margin-top: 8px; width: 100%;
-  display: flex; align-items: center; gap: 6px;
-}
-.filter-status.active { color: var(--accent); font-weight: 600; }
-.spin { display:inline-block; width:11px; height:11px; border:2px solid var(--bg-card2); border-top-color:#fff; border-radius:50%; animation: sp .6s linear infinite; }
-@keyframes sp { to { transform: rotate(360deg); } }
+      --seq-1: #12233a; --seq-2: #184f95; --seq-3: #2a78d6; --seq-4: #6da7ec; --seq-5: #cde2fb;
 
-.section-label {
-  font-family: 'Sora', sans-serif;
-  font-size: 11px; font-weight: 600;
-  color: var(--tx-faint);
-  letter-spacing: .07em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  padding-left: 2px;
-}
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page:        #101113;
+    --surface:     #1a1c20;
+    --surface-2:   #1f2226;
+    --ink:         #f3f3f0;
+    --ink-2:       #b7bac0;
+    --muted:       #85888e;
+    --border:      rgba(255,255,255,0.10);
+    --border-2:    rgba(255,255,255,0.16);
 
-.card {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 20px;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-}
-.card-title {
-  font-family: 'Sora', sans-serif;
-  font-size: 12px; font-weight: 600;
-  color: var(--tx-muted);
-  margin-bottom: 14px;
-  letter-spacing: .03em;
-  text-transform: uppercase;
-}
+    --zegel:       #3987e5;
+    --zegel-soft:  #1c3f63;
+    --idat:        #d95926;
+    --idat-soft:   #5c3220;
 
-.kpi-card {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 20px;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-}
-.kpi-label {
-  font-size: 11px; color: var(--tx-muted);
-  font-weight: 500; margin-bottom: 6px;
-  text-transform: uppercase; letter-spacing: .04em;
-}
-.kpi-sub  { font-size: 11px; color: var(--tx-faint); margin-top: 4px; }
-.kpi-big  { color: var(--tx-primary); }
+    --neutral-bar: #8fa2bd;
+    --neutral-bar-soft: #2a3038;
 
-.pill-idat  { background: #fff0eb; color: #b84519; border-radius: 4px; padding: 1px 6px; font-size: 11px; font-weight: 600; }
-.pill-zegel { background: #eff6ff; color: #1d4ed8; border-radius: 4px; padding: 1px 6px; font-size: 11px; font-weight: 600; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .pill-idat  { background:#431407; color:#fb923c; }
-  :root:not([data-theme="light"]) .pill-zegel { background:#1e3a8a; color:#93c5fd; }
-}
-:root[data-theme="dark"] .pill-idat  { background:#431407; color:#fb923c; }
-:root[data-theme="dark"] .pill-zegel { background:#1e3a8a; color:#93c5fd; }
+    --good:        #0ca30c;
+    --warning:     #e0a52c;
+    --critical:    #e66767;
 
-.bar-wrap   { margin-bottom: 10px; }
-.bar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; font-size: 12px; }
-.bar-label  { color: var(--tx-primary); font-weight: 500; max-width: 75%; }
-.bar-val    { color: var(--tx-primary); font-weight: 700; font-family: 'Sora', sans-serif; white-space: nowrap; }
-.bar-track  { height: 10px; background: var(--bg-card2); border-radius: 6px; overflow: hidden; position: relative; border: 1px solid var(--border); }
-.bar-fill   { height: 100%; border-radius: 6px; transition: width .3s ease; position: relative; }
-.bar-fill:hover::after {
-  content: attr(data-tip);
-  position: absolute;
-  bottom: 120%; left: 50%; transform: translateX(-50%);
-  background: var(--tx-primary); color: var(--bg-card);
-  padding: 4px 8px; border-radius: 6px; font-size: 11px;
-  white-space: nowrap; pointer-events: none; z-index: 99;
-}
+    --seq-1: #12233a; --seq-2: #184f95; --seq-3: #2a78d6; --seq-4: #6da7ec; --seq-5: #cde2fb;
 
-.stacked-bar { display: flex; height: 28px; border-radius: 6px; overflow: hidden; width: 100%; cursor: default; position: relative; }
-.stacked-seg { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #fff; transition: opacity .2s; white-space: nowrap; overflow: hidden; position: relative; }
-.stacked-seg:hover { opacity: .85; }
-.stacked-seg .seg-tip {
-  display: none; position: absolute;
-  bottom: 110%; left: 50%; transform: translateX(-50%);
-  background: var(--tx-primary); color: var(--bg-card);
-  padding: 4px 8px; border-radius: 6px; font-size: 11px;
-  white-space: nowrap; z-index: 99;
-}
-.stacked-seg:hover .seg-tip { display: block; }
-.seg-label-row { display: flex; gap: 12px; margin-top: 6px; font-size: 11px; color: var(--tx-muted); }
-.seg-dot { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 3px; vertical-align: middle; }
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.6);
+  }
 
-.hist-wrap { display: flex; align-items: flex-end; gap: 4px; height: 90px; padding-bottom: 2px; }
-.hist-col  { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; }
-.hist-bar  { width: 100%; border-radius: 4px 4px 0 0; min-height: 2px; position: relative; cursor: default; }
-.hist-bar:hover::after {
-  content: attr(data-tip);
-  position: absolute; bottom: 105%; left: 50%; transform: translateX(-50%);
-  background: var(--tx-primary); color: var(--bg-card);
-  padding: 3px 7px; border-radius: 5px; font-size: 10px;
-  white-space: nowrap; z-index: 99;
-}
-.hist-x { font-size: 10px; color: var(--tx-faint); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, .num-hero { font-family: "Sora", "Inter", system-ui, sans-serif; text-wrap: balance; }
+  .tnum { font-variant-numeric: tabular-nums; }
 
-.table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-thead th {
-  text-align: left; padding: 8px 12px;
-  font-family: 'Sora', sans-serif; font-size: 11px; font-weight: 600;
-  color: var(--tx-muted); letter-spacing: .04em; text-transform: uppercase;
-  border-bottom: 2px solid var(--border);
-  white-space: nowrap;
-}
-tbody td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--tx-primary); vertical-align: middle; }
-tbody tr:last-child td { border-bottom: none; }
-tbody tr:hover td { background: var(--bg-card2); }
-.row-low td { opacity: .55; }
-.prom-pill {
-  display: inline-block; padding: 2px 9px; border-radius: 12px;
-  font-weight: 600; font-size: 12px;
-}
-.prom-green { background: var(--pill-green-bg); color: var(--pill-green-tx); }
-.prom-amber { background: var(--pill-amber-bg); color: var(--pill-amber-tx); }
-.prom-red   { background: var(--pill-red-bg);   color: var(--pill-red-tx); }
-.note-foot  { font-size: 11px; color: var(--tx-faint); margin-top: 10px; font-style: italic; }
+  a { color: var(--zegel); }
 
-.tema-row   { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-.tema-rank  { font-size: 11px; font-weight: 700; color: var(--tx-faint); width: 18px; text-align: right; }
-.tema-bar-wrap { flex: 1; }
-.tema-bar   { height: 8px; border-radius: 4px; }
-.tema-name  { font-size: 12px; color: var(--tx-primary); font-weight: 500; min-width: 0; flex: 1.6; }
-.tema-cnt   { font-size: 12px; font-weight: 700; color: var(--tx-muted); font-family: 'Sora', sans-serif; width: 28px; text-align: right; }
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 28px 24px 64px;
+  }
 
-.hallazgo-text { font-size: 13.5px; color: var(--tx-primary); line-height: 1.65; margin-bottom: 10px; }
-.rec-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
-@media (max-width: 760px) { .rec-grid { grid-template-columns: 1fr; } }
-.rec-card {
-  background: var(--bg-card2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px;
-}
-.rec-card h4 { font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
-.rec-card p  { font-size: 12.5px; color: var(--tx-muted); line-height: 1.55; }
-.prio-alta   { display: inline-block; margin-bottom: 8px; background:#fee2e2; color:#991b1b; border-radius: 4px; padding: 2px 8px; font-size: 10px; font-weight: 700; letter-spacing: .05em; }
-.prio-media  { display: inline-block; margin-bottom: 8px; background:#fef3c7; color:#92400e; border-radius: 4px; padding: 2px 8px; font-size: 10px; font-weight: 700; letter-spacing: .05em; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .prio-alta  { background:#7f1d1d; color:#fca5a5; }
-  :root:not([data-theme="light"]) .prio-media { background:#78350f; color:#fde68a; }
-}
-:root[data-theme="dark"] .prio-alta  { background:#7f1d1d; color:#fca5a5; }
-:root[data-theme="dark"] .prio-media { background:#78350f; color:#fde68a; }
+  /* ---------- header ---------- */
+  header.top {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--zegel); }
+  h1.title {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .subtitle { margin: 2px 0 0; color: var(--ink-2); font-size: 15px; max-width: 62ch; }
 
-.empty-state { text-align:center; padding: 30px 20px; color: var(--tx-faint); font-size: 13px; }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 10px; border-radius: 999px;
+    font-size: 12px; font-weight: 600;
+    border: 1px solid var(--border-2);
+    color: var(--ink-2);
+    background: var(--surface);
+  }
+  .badge.warn { color: #8a5a00; border-color: rgba(217,138,0,0.35); background: rgba(217,138,0,0.10); }
+  :root:not([data-theme="light"]) .badge.warn { color: #f0c479; }
+
+  /* ---------- KPI strip ---------- */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .kpi .label { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+  .kpi .value { font-size: 28px; font-weight: 700; }
+  .kpi .delta { font-size: 12.5px; color: var(--ink-2); }
+  .kpi .delta b { color: var(--ink); }
+
+  /* ---------- section / card ---------- */
+  .section { margin-bottom: 26px; }
+  .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+  .section-head h2 { font-size: 18px; margin: 0; font-weight: 700; }
+  .section-head p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; align-items: stretch; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+  }
+  .card h3 { margin: 0 0 2px; font-size: 14.5px; font-weight: 700; }
+  .card .hint { margin: 0 0 14px; color: var(--muted); font-size: 12.5px; }
+
+  .legend { display: flex; gap: 16px; margin-bottom: 12px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--ink-2); font-weight: 600; }
+  .swatch { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+
+  /* ---------- horizontal bar rows ---------- */
+  .bar-row { display: grid; grid-template-columns: minmax(120px,190px) 1fr 52px; align-items: center; gap: 10px; margin-bottom: 9px; }
+  .bar-row:last-child { margin-bottom: 0; }
+  .bar-row .rlabel { font-size: 12.5px; color: var(--ink-2); }
+  .bar-track { position: relative; height: 16px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+  .bar-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; cursor: pointer; transition: filter 0.15s ease; }
+  .bar-fill:hover { filter: brightness(1.08); }
+  .bar-row .rvalue { font-size: 12.5px; font-weight: 700; text-align: right; }
+
+  .bar-row.grouped { grid-template-columns: minmax(150px,220px) 1fr; }
+  .bar-row.grouped .rgroup { display: flex; flex-direction: column; gap: 4px; }
+  .bar-row.grouped .sub { display: grid; grid-template-columns: 1fr 44px; align-items: center; gap: 8px; }
+  .bar-row.grouped .bar-track { height: 11px; }
+  .bar-row.grouped .rvalue { font-size: 11.5px; }
+
+  /* ---------- stacked 100% bars ---------- */
+  .stack-row { margin-bottom: 16px; }
+  .stack-row:last-child { margin-bottom: 0; }
+  .stack-row .slabel { display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; margin-bottom: 6px; }
+  .stack-row .slabel span.n { font-weight: 500; color: var(--muted); }
+  .stack-track { display: flex; height: 22px; border-radius: 6px; overflow: hidden; background: var(--surface-2); }
+  .stack-seg { height: 100%; cursor: pointer; border-right: 2px solid var(--surface); transition: filter 0.15s ease; }
+  .stack-seg:last-child { border-right: none; }
+  .stack-seg:hover { filter: brightness(1.08); }
+
+  /* ---------- histogram (vertical) ---------- */
+  .hist { display: flex; align-items: flex-end; gap: 6px; height: 150px; padding-top: 6px; }
+  .hist-col { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 6px; }
+  .hist-bar { width: 100%; max-width: 30px; border-radius: 4px 4px 2px 2px; cursor: pointer; transition: filter 0.15s ease; background: var(--neutral-bar); }
+  .hist-bar:hover { filter: brightness(1.15); }
+  .hist-x { font-size: 10.5px; color: var(--muted); }
+
+  /* ---------- tooltip ---------- */
+  #tooltip {
+    position: fixed; z-index: 50; pointer-events: none;
+    background: var(--ink); color: var(--page);
+    padding: 7px 10px; border-radius: 8px; font-size: 12px; font-weight: 600;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    opacity: 0; transform: translate(-50%, calc(-100% - 10px)); transition: opacity 0.1s ease;
+    white-space: nowrap;
+  }
+  #tooltip .tt-sub { display: block; font-weight: 500; opacity: 0.75; font-size: 11px; margin-top: 1px; }
+  #tooltip.show { opacity: 1; }
+
+  /* ---------- prep table etc ---------- */
+  .stat-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat-pair .cell { border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .stat-pair .cell .k { font-size: 11.5px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
+  .stat-pair .cell .v { font-size: 20px; font-weight: 700; margin-top: 4px; }
+  .stat-pair .cell .v2 { font-size: 12px; color: var(--ink-2); margin-top: 2px; }
+
+  /* ---------- table ---------- */
+  .table-scroll { overflow-x: auto; }
+  table.cap { width: 100%; border-collapse: collapse; font-size: 12.8px; min-width: 640px; }
+  table.cap th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); font-weight: 700; padding: 8px 10px; border-bottom: 1px solid var(--border-2); }
+  table.cap td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  table.cap tr:last-child td { border-bottom: none; }
+  table.cap td.num, table.cap th.num { text-align: right; }
+  .brand-pill { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 11.5px; }
+  .brand-pill .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .score-pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-weight: 700; font-size: 11.5px; }
+  .score-good { background: rgba(12,163,12,0.14); color: #0a7a0a; }
+  .score-warn { background: rgba(217,138,0,0.15); color: #8a5a00; }
+  .score-bad { background: rgba(208,59,59,0.14); color: #a12727; }
+  :root:not([data-theme="light"]) .score-good { color: #4fd44f; }
+  :root:not([data-theme="light"]) .score-warn { color: #f0c479; }
+  :root:not([data-theme="light"]) .score-bad { color: #ff9c9c; }
+  .lown { color: var(--muted); font-size: 11px; }
+
+  /* ---------- recommendations ---------- */
+  .rec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .rec-card { border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; background: var(--surface-2); }
+  .rec-card .rec-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+  .rec-card h4 { margin: 0; font-size: 14px; font-weight: 700; }
+  .rec-card p { margin: 0; color: var(--ink-2); font-size: 13px; }
+  .prio { font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; padding: 3px 8px; border-radius: 999px; }
+  .prio-alta { background: rgba(208,59,59,0.14); color: #a12727; }
+  .prio-media { background: rgba(217,138,0,0.15); color: #8a5a00; }
+  :root:not([data-theme="light"]) .prio-alta { color: #ff9c9c; }
+  :root:not([data-theme="light"]) .prio-media { color: #f0c479; }
+
+  .exec-summary p { margin: 0 0 10px; color: var(--ink-2); font-size: 13.8px; max-width: 92ch; }
+  .exec-summary p:last-child { margin-bottom: 0; }
+  .exec-summary strong { color: var(--ink); }
+
+  footer { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  @media (max-width: 860px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .grid-2, .grid-3, .rec-grid, .stat-pair { grid-template-columns: 1fr; }
+  }
+
+  .badge.ok { color: #0a7a0a; border-color: rgba(12,163,12,0.35); background: rgba(12,163,12,0.10); }
+  :root:not([data-theme="light"]) .badge.ok { color: #4fd44f; }
+
+  /* ---------- filtros ---------- */
+  .filterbar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    box-shadow: var(--shadow);
+    margin-bottom: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 16px;
+  }
+  .fgroup { display: flex; flex-direction: column; gap: 6px; min-width: 240px; flex: 1 1 240px; }
+  .fgroup label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .fgroup select {
+    font-family: inherit; font-size: 13.5px;
+    padding: 9px 11px; border-radius: 9px;
+    border: 1px solid var(--border-2);
+    background: var(--surface-2); color: var(--ink);
+    cursor: pointer; width: 100%;
+  }
+  .fgroup select:focus-visible { outline: 2px solid var(--zegel); outline-offset: 1px; }
+  .factions { display: flex; gap: 8px; align-items: center; }
+  .btn {
+    font-family: inherit; font-size: 13px; font-weight: 700;
+    padding: 10px 16px; border-radius: 9px; cursor: pointer;
+    border: 1px solid var(--border-2);
+    display: inline-flex; align-items: center; gap: 7px;
+    transition: filter 0.15s ease, transform 0.08s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn:focus-visible { outline: 2px solid var(--zegel); outline-offset: 2px; }
+  .btn-solid { background: var(--zegel); border-color: var(--zegel); color: #fff; }
+  .btn-solid:hover { filter: brightness(1.07); }
+  .btn-solid[disabled] { opacity: 0.6; cursor: default; }
+  .btn-quiet { background: var(--surface-2); color: var(--ink-2); }
+  .btn-quiet:hover { color: var(--ink); }
+  .fstatus { flex-basis: 100%; font-size: 12.5px; color: var(--muted); display: flex; align-items: center; gap: 7px; }
+  .fstatus.on { color: var(--zegel); font-weight: 700; }
+  .spin {
+    display: inline-block; width: 12px; height: 12px;
+    border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff;
+    border-radius: 50%; animation: spin 0.6s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .spin { animation: none; } }
+
+  .empty { text-align: center; padding: 26px 16px; color: var(--muted); font-size: 13px; }
+  .brandless { color: var(--muted); font-size: 12.5px; padding: 4px 0; }
 </style>
-</head>
-<body>
-<div class="page">
 
-<!-- HEADER -->
-<div class="header">
-  <div class="header-left">
-    <h1>Encuesta de Satisfacción — Bienvenida Docente</h1>
-    <p>Serv. Educ. Empresarial S.A.C. &nbsp;·&nbsp; IES 2026-III</p>
-  </div>
-  <div class="header-right">
-    <span class="badge-real">✓ Datos reales</span>
-    <span class="badge-period" id="badge-n">n = 17</span>
-    <button class="theme-btn" onclick="toggleTheme()">☀ / ☾</button>
-  </div>
-</div>
+<div class="wrap">
 
-<!-- FILTROS -->
-<div class="filter-bar">
-  <div class="filter-group">
-    <label for="f-fecha">Fecha de inicio de semana de clases es :</label>
-    <select id="f-fecha" onchange="applyFilters()">
-      <option value="">Todas las fechas</option>
-    </select>
-  </div>
-  <div class="filter-group">
-    <label for="f-sup">Supervisor</label>
-    <select id="f-sup" onchange="applyFilters()">
-      <option value="">Todos los supervisores</option>
-    </select>
-  </div>
-  <div class="filter-actions">
-    <button class="btn btn-ghost" onclick="clearFilters()">✕ Limpiar filtros</button>
-    <button class="btn btn-primary" id="btn-refresh" onclick="refreshData()">↻ Actualizar</button>
-  </div>
-  <div class="filter-status" id="filter-status"></div>
-</div>
+  <header class="top">
+    <div class="eyebrow"><span class="dot"></span> Supervisión Docente · Bienvenida docente</div>
+    <h1 class="title">Encuesta de Satisfacción — Bienvenida Docente</h1>
+    <p class="subtitle">Resultados de la inducción de inicio de periodo académico, para orientar decisiones de mejora antes de la próxima bienvenida. Use los filtros para aislar una semana de clases o un supervisor.</p>
+    <div class="badge-row">
+      <span class="badge" id="badge-n">– encuestas</span>
+      <span class="badge" id="badge-periodos">–</span>
+      <span class="badge" id="badge-sync">–</span>
+      <span class="badge ok">✓ Datos reales — respuestas del formulario de docentes</span>
+    </div>
+  </header>
 
-<!-- KPIs -->
-<div class="section">
-  <div class="section-label">KPIs Generales</div>
-  <div class="grid-kpi">
-    <div class="kpi-card">
-      <div class="kpi-label">Promedio general</div>
-      <div class="num-big kpi-big" id="kpi-prom" style="color:var(--idat-c)">—</div>
-      <div class="kpi-sub">Escala 1–5 · 7 ítems</div>
+  <!-- FILTROS -->
+  <div class="filterbar">
+    <div class="fgroup">
+      <label for="f-fecha">Fecha de inicio de semana de clases es :</label>
+      <select id="f-fecha"><option value="">Todas las fechas</option></select>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-label">NPS Global</div>
-      <div class="num-big kpi-big" id="kpi-nps" style="color:var(--nps-good)">—</div>
-      <div class="kpi-sub" id="kpi-nps-sub">—</div>
+    <div class="fgroup">
+      <label for="f-sup">Supervisor</label>
+      <select id="f-sup"><option value="">Todos los supervisores</option></select>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-label">% Detractores</div>
-      <div class="num-big kpi-big" id="kpi-det" style="color:var(--nps-crit)">—</div>
-      <div class="kpi-sub" id="kpi-det-sub">—</div>
+    <div class="factions">
+      <button class="btn btn-quiet" id="btn-clear" type="button">✕ Limpiar filtros</button>
+      <button class="btn btn-solid" id="btn-refresh" type="button" title="Lee la hoja publicada en la web y recalcula todo el tablero">↻ Actualizar</button>
     </div>
-    <div class="kpi-card">
-      <div class="kpi-label">Listos para iniciar</div>
-      <div class="num-big kpi-big" id="kpi-prep" style="color:var(--nps-good)">—</div>
-      <div class="kpi-sub">Preparado(a) o Muy preparado(a)</div>
+    <div class="fstatus" id="fstatus"></div>
+  </div>
+
+  <!-- KPI STRIP -->
+  <div class="kpi-grid">
+    <div class="kpi">
+      <span class="label">Promedio general</span>
+      <span class="value tnum" id="kpi-promedio">–</span>
+      <span class="delta">sobre 5.0 · <span id="kpi-prom-split"></span></span>
+    </div>
+    <div class="kpi">
+      <span class="label">NPS global</span>
+      <span class="value tnum" id="kpi-nps">–</span>
+      <span class="delta" id="kpi-nps-split"></span>
+    </div>
+    <div class="kpi">
+      <span class="label">Docentes en riesgo (detractores)</span>
+      <span class="value tnum" id="kpi-det">–</span>
+      <span class="delta"><b id="kpi-det-pct" class="tnum"></b> del total requiere seguimiento</span>
+    </div>
+    <div class="kpi">
+      <span class="label">Se sienten preparados</span>
+      <span class="value tnum" id="kpi-prep">–</span>
+      <span class="delta"><b id="kpi-prep-not" class="tnum"></b> no del todo listos para iniciar</span>
     </div>
   </div>
-</div>
 
-<!-- DIMENSIONES + ÍTEMS -->
-<div class="section">
-  <div class="section-label">Dimensiones e Ítems</div>
-  <div class="grid-2">
+  <!-- COMPARATIVO POR MARCA -->
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2>Comparativo por marca</h2>
+        <p>Promedio general (escala 1–5) y NPS (–100 a 100) de la bienvenida docente</p>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Promedio general de satisfacción</h3>
+        <p class="hint">Media de los 7 ítems de la encuesta (Q4–Q6), por marca</p>
+        <div id="chart-promedio"></div>
+      </div>
+      <div class="card">
+        <h3>Net Promoter Score</h3>
+        <p class="hint">% Promotores − % Detractores, por marca</p>
+        <div id="chart-nps"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPOSICION NPS -->
+  <section class="section">
     <div class="card">
-      <div class="card-title">3 dimensiones — promedio (Idat)</div>
-      <div id="dim-chart"></div>
+      <h3>Composición de recomendación (Q8)</h3>
+      <p class="hint">Distribución de promotores, pasivos y detractores — base: escala 0 a 10</p>
+      <div class="legend">
+        <span class="legend-item"><span class="swatch" style="background:var(--good)"></span>Promotor (9–10)</span>
+        <span class="legend-item"><span class="swatch" style="background:var(--warning)"></span>Pasivo (7–8)</span>
+        <span class="legend-item"><span class="swatch" style="background:var(--critical)"></span>Detractor (0–6)</span>
+      </div>
+      <div id="chart-nps-stack"></div>
+    </div>
+  </section>
+
+  <!-- DIMENSIONES -->
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2>Dimensiones evaluadas</h2>
+        <p>Satisfacción general, claridad de la información y organización</p>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Promedio por dimensión</h3>
+        <p class="hint">Escala 1 (totalmente en desacuerdo) a 5 (totalmente de acuerdo)</p>
+        <div class="legend" id="legend-dims"></div>
+        <div id="chart-dims"></div>
+      </div>
+      <div class="card">
+        <h3>Ítem más débil de la encuesta</h3>
+        <p class="hint">Los 7 ítems, ordenados del más bajo al más alto (pase el cursor para ver el detalle)</p>
+        <div id="chart-items"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREPARACION + NPS DIST -->
+  <section class="section">
+    <div class="grid-2">
+      <div class="card">
+        <h3>Nivel de preparación para iniciar clases (Q7)</h3>
+        <p class="hint">% de docentes por nivel, tras participar en la bienvenida</p>
+        <div id="chart-prep"></div>
+      </div>
+      <div class="card">
+        <h3>Distribución de la nota de recomendación (Q8)</h3>
+        <p class="hint">Número de docentes por puntaje, 0 a 10</p>
+        <div id="chart-hist"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONDICION DOCENTE -->
+  <section class="section">
+    <div class="card">
+      <h3>Docentes nuevos vs. continuadores</h3>
+      <p class="hint">¿La experiencia previa en la institución cambia la percepción de la bienvenida?</p>
+      <div class="stat-pair" id="cond-stats"></div>
+    </div>
+  </section>
+
+  <!-- TEMAS A REFORZAR -->
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2>Temas que los docentes piden reforzar</h2>
+        <p>Menciones combinadas de las preguntas 9 y 10 (respuesta abierta)</p>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Ranking general</h3>
+        <p class="hint">Total de menciones dentro del filtro activo</p>
+        <div id="chart-temas"></div>
+      </div>
+      <div class="card">
+        <h3>Prioridad por marca</h3>
+        <p class="hint">Temas más mencionados en cada marca — agendas de refuerzo distintas</p>
+        <div id="temas-por-marca"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPERVISORES -->
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2>Desempeño por supervisor y sede</h2>
+        <p>Promedio general y NPS promedio de los docentes atendidos por cada supervisor</p>
+      </div>
     </div>
     <div class="card">
-      <div class="card-title">7 ítems — menor a mayor (punto más débil arriba)</div>
-      <div id="items-chart"></div>
+      <div class="table-scroll">
+        <table class="cap" id="tabla-capacitadores">
+          <thead>
+            <tr>
+              <th>Supervisor</th><th>Marca</th><th>Sede</th>
+              <th class="num">Encuestados</th><th class="num">Promedio</th><th class="num">NPS prom.</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="lown" style="margin-top:10px;">* Grupos con menos de 3 encuestados (en gris) tienen baja significancia estadística; se sugiere acumular más datos antes de sacar conclusiones sobre ese supervisor.</p>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- PREPARACIÓN + HISTOGRAMA NPS -->
-<div class="section">
-  <div class="section-label">Preparación y Distribución NPS</div>
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title">Nivel de preparación (Q7)</div>
-      <div id="q7-chart"></div>
+  <!-- HALLAZGOS -->
+  <section class="section">
+    <div class="section-head">
+      <div><h2>Hallazgos clave</h2></div>
     </div>
-    <div class="card">
-      <div class="card-title">Histograma NPS (Q8) — distribución</div>
-      <div id="hist-nps"></div>
-      <div style="display:flex;gap:12px;margin-top:10px;font-size:11px;color:var(--tx-muted)">
-        <span><span class="seg-dot" style="background:var(--nps-crit)"></span>Detractor (0–6)</span>
-        <span><span class="seg-dot" style="background:var(--nps-warn)"></span>Pasivo (7–8)</span>
-        <span><span class="seg-dot" style="background:var(--nps-good)"></span>Promotor (9–10)</span>
-      </div>
-    </div>
-  </div>
-</div>
+    <div class="card exec-summary" id="hallazgos"></div>
+  </section>
 
-<!-- TOP TEMAS -->
-<div class="section">
-  <div class="section-label">Temas a Reforzar</div>
-  <div class="card">
-    <div class="card-title">Top temas mencionados (Q9 + Q10) — según filtro activo</div>
-    <div id="temas-total"></div>
-  </div>
-</div>
-
-<!-- TABLA CAPACITADORES -->
-<div class="section">
-  <div class="section-label">Desempeño por Supervisor y Sede</div>
-  <div class="card">
-    <div class="card-title">Resultados agrupados · * muestra &lt; 3, datos no estadísticamente representativos</div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Supervisor</th>
-            <th>Marca</th>
-            <th>Sede</th>
-            <th>Encuestados</th>
-            <th>Promedio</th>
-            <th>NPS Prom.</th>
-          </tr>
-        </thead>
-        <tbody id="cap-table"></tbody>
-      </table>
-    </div>
-    <p class="note-foot">* Filas atenuadas: menos de 3 encuestados. Los valores pueden no ser estadísticamente confiables por tamaño de muestra insuficiente.</p>
-  </div>
-</div>
-
-<!-- HALLAZGOS (estáticos, referidos al dataset completo) -->
-<div class="section">
-  <div class="section-label">Análisis Ejecutivo (dataset completo)</div>
-  <div class="card" style="margin-bottom:14px">
-    <div class="card-title">Hallazgos clave</div>
-    <p class="hallazgo-text">
-      <strong>Satisfacción alta y homogénea.</strong> Con un promedio global de 4.65/5 y un NPS de +53, la bienvenida docente IES 2026-III de Idat arroja resultados sólidos. El 100% de los participantes se declara preparado o muy preparado para iniciar el periodo, y solo 1 de 17 docentes (5.9%) califica como detractor (nota 5). La dimensión mejor valorada es Organización y oportunidad (4.71).
-    </p>
-    <p class="hallazgo-text">
-      <strong>El ítem más débil es Q5_3 "Espacios de consulta resolvieron dudas" (4.53).</strong> Aunque la diferencia frente al ítem más alto (Q6_2, 4.76) es de apenas 0.23 puntos, concentra la mayor variabilidad negativa. El único detractor (NPS 5) proviene de la sede San Juan de Lurigancho y otorgó las puntuaciones más bajas en Q4_2 (2) y Q5_3 (2).
-    </p>
-    <p class="hallazgo-text">
-      <strong>Brecha entre supervisores.</strong> Eduardo Diez Canseco (Wilson, n=8) lidera con promedio 4.88 y NPS +75. Karol Santamaria (San Juan de Lurigancho, n=5) obtiene el promedio más bajo del grupo confiable: 4.23 y NPS +20, impulsado por el único detractor. Sistema de evaluación es el tema más mencionado (4 veces). Zegel no registra respuestas en esta convocatoria.
-    </p>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Recomendaciones para Gerencia</div>
-    <div class="rec-grid">
-      <div class="rec-card">
-        <span class="prio-alta">ALTA</span>
-        <h4>Fortalecer espacios de consulta en sesión</h4>
-        <p>El ítem Q5_3 (4.53) es el punto más débil. Reservar un bloque de preguntas al final de cada bienvenida con un moderador dedicado.</p>
-      </div>
-      <div class="rec-card">
-        <span class="prio-alta">ALTA</span>
-        <h4>Atención inmediata al detractor (San Juan de Lurigancho)</h4>
-        <p>1 docente otorgó NPS 5 con puntuaciones bajas en varios ítems. Contactar proactivamente para identificar la causa raíz.</p>
-      </div>
-      <div class="rec-card">
-        <span class="prio-media">MEDIA</span>
-        <h4>Agenda de refuerzo: Sistema de evaluación y Plataforma EVA</h4>
-        <p>Incluir módulos específicos o microcápsulas de refuerzo digital antes del inicio de clases.</p>
-      </div>
-      <div class="rec-card">
-        <span class="prio-media">MEDIA</span>
-        <h4>Estandarizar buenas prácticas de Eduardo Diez Canseco</h4>
-        <p>Con NPS +75, su sesión (Wilson) es la de mejor desempeño. Replicar sus dinámicas como modelo en otras sedes.</p>
-      </div>
-      <div class="rec-card">
-        <span class="prio-media">MEDIA</span>
-        <h4>Ampliar cobertura a Zegel</h4>
-        <p>Esta convocatoria no recibió respuestas de Zegel. Asegurar el envío del formulario antes del cierre de semana.</p>
-      </div>
-      <div class="rec-card">
-        <span class="prio-media">MEDIA</span>
-        <h4>Contenido específico para docentes continuadores</h4>
-        <p>Varios docentes solicitaron temas nuevos que no repitan lo ya conocido. Diseñar un bloque diferenciado.</p>
+  <!-- RECOMENDACIONES -->
+  <section class="section">
+    <div class="section-head">
+      <div>
+        <h2>Recomendaciones para gerencia</h2>
+        <p>Priorizadas según impacto en la experiencia y tamaño del problema</p>
       </div>
     </div>
-  </div>
+    <div class="rec-grid" id="recomendaciones"></div>
+  </section>
+
+  <footer>
+    <span>Fuente: Encuesta de Satisfacción de Bienvenida Docente. Datos leídos en vivo desde la hoja publicada.</span>
+    <span>Equipo de Supervisión Docente</span>
+  </footer>
+
 </div>
 
-</div><!-- /page -->
+<div id="tooltip"></div>
+
+<script id="dashboard-data" type="application/json">
+[
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Karol Santamaria", "sede": "San Juan de Lurigancho", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 4, "q5_2": 4, "q5_3": 4, "q6_1": 4, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 8, "q9": "está bien", "q10": "está bien"},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Lalita Piscoya", "sede": "Chiclayo", "marca": "Idat", "q4_1": 4, "q4_2": 4, "q5_1": 4, "q5_2": 4, "q5_3": 4, "q6_1": 4, "q6_2": 4, "q7": "Preparado(a)", "q8": 8, "q9": "ninguno", "q10": "ninguno"},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Milagros Guzman", "sede": "Petit Thouars", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Preparado(a)", "q8": 9, "q9": "Nada por el momento", "q10": "Nada por el momento"},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Karol Santamaria", "sede": "San Juan de Lurigancho", "marca": "Idat", "q4_1": 4, "q4_2": 4, "q5_1": 4, "q5_2": 4, "q5_3": 4, "q6_1": 4, "q6_2": 4, "q7": "Preparado(a)", "q8": 9, "q9": "Programación", "q10": "Reforzar programación docente y evitar cierre de aulas"},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Karol Santamaria", "sede": "San Juan de Lurigancho", "marca": "Idat", "q4_1": 4, "q4_2": 4, "q5_1": 5, "q5_2": 5, "q5_3": 4, "q6_1": 5, "q6_2": 5, "q7": "Preparado(a)", "q8": 8, "q9": "Temas nuevos para docentes antiguos", "q10": "Ninguno"},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Lalita Piscoya", "sede": "Chiclayo", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Perfecto", "q10": "Para mi ninguno"},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Lalita Piscoya", "sede": "Chiclayo", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 4, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 7, "q9": "Uso de la plataforma EVA", "q10": "Uso de plataforma"},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Karol Santamaria", "sede": "San Juan de Lurigancho", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Todo claro", "q10": "Todo muy claro"},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Todo bien.", "q10": "Todo bien."},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Todo conforme", "q10": "Sistema de evaluación escuela"},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Preparado(a)", "q8": 8, "q9": "La forma de evaluar", "q10": "La reprogramacion de clases"},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Todo correcto y claro.", "q10": "Todo correcto y claro."},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "asistencia de estudiantes", "q10": "capacitaciones"},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Karol Santamaria", "sede": "San Juan de Lurigancho", "marca": "Idat", "q4_1": 3, "q4_2": 2, "q5_1": 4, "q5_2": 4, "q5_3": 2, "q6_1": 3, "q6_2": 4, "q7": "Muy preparado(a)", "q8": 5, "q9": "hay varios aspectos y temas que deben de recabar en una reunión con los docentes y después dar solución", "q10": "."},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 4, "q4_2": 4, "q5_1": 4, "q5_2": 4, "q5_3": 4, "q6_1": 4, "q6_2": 4, "q7": "Preparado(a)", "q8": 7, "q9": "todo bien", "q10": "todo ok"},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Evaluaciones", "q10": "Evaluaciones"},
+{"fecha": "IES 2026-III (07/09/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Las capacitaciones", "q10": "Las justificaciones"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Isabel Matos", "sede": "Lima Sur", "marca": "Idat", "q4_1": 4, "q4_2": 4, "q5_1": 4, "q5_2": 4, "q5_3": 4, "q6_1": 4, "q6_2": 4, "q7": "Preparado(a)", "q8": 8, "q9": "Por ahora claro", "q10": "Por ahora claro"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Isabel Matos", "sede": "Lima Sur", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "justificacion de las inasistencias de los alumnos", "q10": "actividades de inclusion para los alumnos"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Isabel Matos", "sede": "Lima Sur", "marca": "Idat", "q4_1": 3, "q4_2": 3, "q5_1": 3, "q5_2": 3, "q5_3": 3, "q6_1": 3, "q6_2": 3, "q7": "Preparado(a)", "q8": 6, "q9": "metodologia", "q10": "orientacion docente"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Isabel Matos", "sede": "Lima Sur", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Todo conforme", "q10": "Todo conforme"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Isabel Matos", "sede": "Lima Sur", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Ninguno", "q10": "Ninguno, por el momento"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Isabel Matos", "sede": "Lima Sur", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Preparado(a)", "q8": 8, "q9": "Me parece claro", "q10": "Todo ok"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Isabel Matos", "sede": "Lima Sur", "marca": "Idat", "q4_1": 4, "q4_2": 4, "q5_1": 4, "q5_2": 4, "q5_3": 4, "q6_1": 4, "q6_2": 4, "q7": "Preparado(a)", "q8": 8, "q9": "Todo bien", "q10": "Programación"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Milagros Guzman", "sede": "Petit Thouars", "marca": "Idat", "q4_1": 4, "q4_2": 4, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "-", "q10": "-"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Isabel Matos", "sede": "Lima Sur", "marca": "Idat", "q4_1": 3, "q4_2": 2, "q5_1": 3, "q5_2": 3, "q5_3": 2, "q6_1": 3, "q6_2": 3, "q7": "Preparado(a)", "q8": 6, "q9": "La modalidad del evaluación docente", "q10": "Las diferencias por cada diferente modalidad"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Isabel Matos", "sede": "Lima Sur", "marca": "Idat", "q4_1": 4, "q4_2": 4, "q5_1": 4, "q5_2": 4, "q5_3": 4, "q6_1": 4, "q6_2": 4, "q7": "Preparado(a)", "q8": 9, "q9": "La programación de cargas horarias.", "q10": "Todo bien."},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Isabel Matos", "sede": "Lima Sur", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Preparado(a)", "q8": 10, "q9": "Los Horarios por curso por secciones a detalle sesiones a desarrolar por fechas.", "q10": "Registro de notas en Eva"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Isabel Matos", "sede": "Lima Sur", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "La encuesta DOCENTE a los estudiantes, pues no sabemos cómo nos evalúan y porqué tiene esta tanto porcentaje.", "q10": "La encuesta DOCENTE a los estudiantes; en este punto, deberían explicar si habrán talleres o capacitaciones para los docentes que están bajos en su encuesta preliminar que tampoco lo detallaron."},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Isabel Matos", "sede": "Lima Sur", "marca": "Idat", "q4_1": 2, "q4_2": 3, "q5_1": 2, "q5_2": 1, "q5_3": 2, "q6_1": 4, "q6_2": 3, "q7": "Poco preparado(a)", "q8": 2, "q9": "Lo relacionado con exámenes y cómo crearlos en EVA, cómo evitar plagio en cursos virtuales", "q10": "Lo relacionado con exámenes y cómo crearlos en EVA, cómo evitar plagio en cursos virtuales"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Milagros Guzman", "sede": "Petit Thouars", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 4, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 9, "q9": "sin comentarios", "q10": "sin comentarios"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Milagros Guzman", "sede": "Petit Thouars", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "El uso de los recursos en el Aula Virtual", "q10": "El uso de los recursos en el Aula Virtual"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Claudia Rodriguez", "sede": "Ate", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "evaluación de desempeño", "q10": "evaluación de desempeño"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 4, "q4_2": 4, "q5_1": 4, "q5_2": 4, "q5_3": 4, "q6_1": 4, "q6_2": 4, "q7": "Preparado(a)", "q8": 9, "q9": "Sugiero utilizar mas pantallazos del sistema eva y menos texto", "q10": "Como ingresar la nota 0 de estudiantes que no rinden evaluación"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 9, "q9": "TODOS LOS QUE NECESITO SE HAN BRINDADO.", "q10": "NINGUNO. TODOS ESTA MUY CLAROS."},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Nuevo", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Preparado(a)", "q8": 10, "q9": "La parte de subir materiales", "q10": "Todo bien"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Todo bien", "q10": "Ninguno"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 3, "q4_2": 3, "q5_1": 3, "q5_2": 3, "q5_3": 3, "q6_1": 3, "q6_2": 3, "q7": "Preparado(a)", "q8": 3, "q9": "Todo bien", "q10": "Todo bien"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "El tema de la organización de los materiales pedagógicos en la plataforma", "q10": "El tema de la organización de los materiales pedagógicos en la plataforma"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Debe de compartir materiales", "q10": "Debe de compartirse materiales."},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 4, "q4_2": 4, "q5_1": 4, "q5_2": 4, "q5_3": 4, "q6_1": 4, "q6_2": 4, "q7": "Muy preparado(a)", "q8": 7, "q9": "todo bien", "q10": "todo bien"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Eduardo Diez Canseco", "sede": "Wilson", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Preparado(a)", "q8": 10, "q9": "Muchas gracias por la capacitación, la parte de las capacitaciones para los docentes", "q10": "capacitaciones para los docentes"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Edgar Salazar", "sede": "Iquitos, Cusco, Arequipa", "marca": "Zegel", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Todo bien", "q10": "Todo bien"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Edgar Salazar", "sede": "Iquitos, Cusco, Arequipa", "marca": "Zegel", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "eL SISTEMA DE EVALUACIÓN", "q10": "EL SISTEMA DE EVALUACION"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Edgar Salazar", "sede": "Iquitos, Cusco, Arequipa", "marca": "Zegel", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Todo ok", "q10": "Todo ok"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Edgar Salazar", "sede": "Iquitos, Cusco, Arequipa", "marca": "Zegel", "q4_1": 4, "q4_2": 4, "q5_1": 4, "q5_2": 4, "q5_3": 4, "q6_1": 4, "q6_2": 4, "q7": "Preparado(a)", "q8": 9, "q9": "todo bien", "q10": "enlaces más que QR"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Edgar Salazar", "sede": "Iquitos, Cusco, Arequipa", "marca": "Zegel", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Todo ha estado claro para mi.", "q10": "Como indiqué todos los temas han sido explicados correctamente."},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Edgar Salazar", "sede": "Iquitos, Cusco, Arequipa", "marca": "Zegel", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Muy bien todo", "q10": "Plataformas. Digitales"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Edgar Salazar", "sede": "Iquitos, Cusco, Arequipa", "marca": "Zegel", "q4_1": 4, "q4_2": 4, "q5_1": 4, "q5_2": 4, "q5_3": 4, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 9, "q9": "Ninguna", "q10": "Ninguna"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Edgar Salazar", "sede": "Iquitos, Cusco, Arequipa", "marca": "Zegel", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 4, "q6_1": 5, "q6_2": 4, "q7": "Muy preparado(a)", "q8": 10, "q9": "Un material para la sesión de clase para reforzar la estructura.", "q10": "-"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Edgar Salazar", "sede": "Iquitos, Cusco, Arequipa", "marca": "Zegel", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Natal preparado(a)", "q8": 10, "q9": "Sobre la atención a estudiantes con barreras", "q10": ".."},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Edgar Salazar", "sede": "Iquitos, Cusco, Arequipa", "marca": "Zegel", "q4_1": 4, "q4_2": 5, "q5_1": 5, "q5_2": 4, "q5_3": 5, "q6_1": 5, "q6_2": 4, "q7": "Muy preparado(a)", "q8": 8, "q9": "Todo completo. Por favor, no olviden hacernos llegar la presentación y los tutoriales que son muchos temas (sobre todo para los docentes nuevos)", "q10": "Sobre todo, nuestras responsabilidades a cumplir en esta nueva estructura de ciclos anuales, es decir, los componentes de nuestra evaluación; sobre todo los correspondiente a las capacitaciones de de la LDD ya que es importante no pasarnos de las fechas. Algunos de nosotros dictamos ciclos regulares y ciclos acelerados y se nos puede confundir los calendarios para ese fin. Muchas gracias. Saludos,"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Lalita Piscoya", "sede": "Chiclayo", "marca": "Zegel", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Las fechas de las evaluaciones de acuerdo a los ciclos que tienen diferentes semanas", "q10": "La toma de asistencia a clase"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Lalita Piscoya", "sede": "Chiclayo", "marca": "Zegel", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "todo bien", "q10": "todo bien"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Edward Gaslac", "sede": "Lima Centro", "marca": "Zegel", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Subida de notas", "q10": "Ruta informativa"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Edgar Salazar", "sede": "Iquitos, Cusco, Arequipa", "marca": "Zegel", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Todo bien", "q10": "Todo bien"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Edgar Salazar", "sede": "Iquitos, Cusco, Arequipa", "marca": "Zegel", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": ".", "q10": "."},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Nuevo", "cap": "Isabel Matos", "sede": "Lima Sur", "marca": "Zegel", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Preparado(a)", "q8": 10, "q9": "Todo bien", "q10": "Todo bien"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Edgar Salazar", "sede": "Iquitos, Cusco, Arequipa", "marca": "Zegel", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Las obligaciones y responsabilidades de los alumnos", "q10": "Deberíamos tener acceso a turnitin y pasar los trabajos de los alumnos para saber el nivel de uso de IA"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Edgar Salazar", "sede": "Iquitos, Cusco, Arequipa", "marca": "Zegel", "q4_1": 4, "q4_2": 4, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 4, "q7": "Preparado(a)", "q8": 9, "q9": "comentar sobre casuística de consultas docentes", "q10": "comentar sobre casuística de consultas docentes"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Lalita Piscoya", "sede": "Chiclayo", "marca": "Zegel", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "Todo conforme", "q10": "Lo único que pido es que la respuesta de Atención al Docente sea mas rápido."},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Nuevo", "cap": "Milagros Guzman", "sede": "Petit Thouars", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 3, "q5_2": 3, "q5_3": 3, "q6_1": 5, "q6_2": 5, "q7": "Preparado(a)", "q8": 10, "q9": "El ingreso de notas", "q10": "El ingreso de notas"},
+{"fecha": "2026-IIIA (24/08/2026)", "cond": "Soy Docente Continuador", "cap": "Milagros Guzman", "sede": "Petit Thouars", "marca": "Idat", "q4_1": 5, "q4_2": 5, "q5_1": 5, "q5_2": 5, "q5_3": 5, "q6_1": 5, "q6_2": 5, "q7": "Muy preparado(a)", "q8": 10, "q9": "todos", "q10": "ninguno"}
+]
+</script>
 
 <script>
-// ===================================================================
-// DATOS CRUDOS (embebidos desde la lectura del Google Sheet)
-// Cada objeto = 1 respuesta del formulario
-// ===================================================================
-var RAW_DATA = [
-{"ts":"3/09/2026 11:35","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Karol Santamaria","sede":"San Juan de Lurigancho","marca":"Idat","q4_1":5,"q4_2":5,"q5_1":4,"q5_2":4,"q5_3":4,"q6_1":4,"q6_2":5,"q7":"Muy preparado(a)","q8":8,"q9":"está bien","q10":"está bien"},
-{"ts":"3/09/2026 11:37","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Lalita Piscoya","sede":"Chiclayo","marca":"Idat","q4_1":4,"q4_2":4,"q5_1":4,"q5_2":4,"q5_3":4,"q6_1":4,"q6_2":4,"q7":"Preparado(a)","q8":8,"q9":"ninguno","q10":"ninguno"},
-{"ts":"3/09/2026 11:37","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Milagros Guzman","sede":"Petit Thouars","marca":"Idat","q4_1":5,"q4_2":5,"q5_1":5,"q5_2":5,"q5_3":5,"q6_1":5,"q6_2":5,"q7":"Preparado(a)","q8":9,"q9":"Nada por el momento","q10":"Nada por el momento"},
-{"ts":"3/09/2026 11:39","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Karol Santamaria","sede":"San Juan de Lurigancho","marca":"Idat","q4_1":4,"q4_2":4,"q5_1":4,"q5_2":4,"q5_3":4,"q6_1":4,"q6_2":4,"q7":"Preparado(a)","q8":9,"q9":"Programación","q10":"Reforzar programación docente y evitar cierre de aulas"},
-{"ts":"3/09/2026 11:39","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Karol Santamaria","sede":"San Juan de Lurigancho","marca":"Idat","q4_1":4,"q4_2":4,"q5_1":5,"q5_2":5,"q5_3":4,"q6_1":5,"q6_2":5,"q7":"Preparado(a)","q8":8,"q9":"Temas nuevos para docentes antiguos","q10":"Ninguno"},
-{"ts":"3/09/2026 11:39","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Lalita Piscoya","sede":"Chiclayo","marca":"Idat","q4_1":5,"q4_2":5,"q5_1":5,"q5_2":5,"q5_3":5,"q6_1":5,"q6_2":5,"q7":"Muy preparado(a)","q8":10,"q9":"Perfecto","q10":"Para mi ninguno"},
-{"ts":"3/09/2026 11:41","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Lalita Piscoya","sede":"Chiclayo","marca":"Idat","q4_1":5,"q4_2":5,"q5_1":5,"q5_2":4,"q5_3":5,"q6_1":5,"q6_2":5,"q7":"Muy preparado(a)","q8":7,"q9":"Uso de la plataforma EVA","q10":"Uso de plataforma"},
-{"ts":"3/09/2026 11:42","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Karol Santamaria","sede":"San Juan de Lurigancho","marca":"Idat","q4_1":5,"q4_2":5,"q5_1":5,"q5_2":5,"q5_3":5,"q6_1":5,"q6_2":5,"q7":"Muy preparado(a)","q8":10,"q9":"Todo claro","q10":"Todo muy claro"},
-{"ts":"3/09/2026 19:49","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Eduardo Diez Canseco","sede":"Wilson","marca":"Idat","q4_1":5,"q4_2":5,"q5_1":5,"q5_2":5,"q5_3":5,"q6_1":5,"q6_2":5,"q7":"Muy preparado(a)","q8":10,"q9":"Todo bien.","q10":"Todo bien."},
-{"ts":"3/09/2026 19:49","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Eduardo Diez Canseco","sede":"Wilson","marca":"Idat","q4_1":5,"q4_2":5,"q5_1":5,"q5_2":5,"q5_3":5,"q6_1":5,"q6_2":5,"q7":"Muy preparado(a)","q8":10,"q9":"Todo conforme","q10":"Sistema de evaluación escuela"},
-{"ts":"3/09/2026 19:52","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Eduardo Diez Canseco","sede":"Wilson","marca":"Idat","q4_1":5,"q4_2":5,"q5_1":5,"q5_2":5,"q5_3":5,"q6_1":5,"q6_2":5,"q7":"Preparado(a)","q8":8,"q9":"La forma de evaluar","q10":"La reprogramacion de clases"},
-{"ts":"3/09/2026 19:53","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Eduardo Diez Canseco","sede":"Wilson","marca":"Idat","q4_1":5,"q4_2":5,"q5_1":5,"q5_2":5,"q5_3":5,"q6_1":5,"q6_2":5,"q7":"Muy preparado(a)","q8":10,"q9":"Todo correcto y claro.","q10":"Todo correcto y claro."},
-{"ts":"3/09/2026 19:54","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Eduardo Diez Canseco","sede":"Wilson","marca":"Idat","q4_1":5,"q4_2":5,"q5_1":5,"q5_2":5,"q5_3":5,"q6_1":5,"q6_2":5,"q7":"Muy preparado(a)","q8":10,"q9":"asistencia de estudiantes","q10":"capacitaciones"},
-{"ts":"3/09/2026 19:55","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Karol Santamaria","sede":"San Juan de Lurigancho","marca":"Idat","q4_1":3,"q4_2":2,"q5_1":4,"q5_2":4,"q5_3":2,"q6_1":3,"q6_2":4,"q7":"Muy preparado(a)","q8":5,"q9":"hay varios aspectos y temas que deben de recabar en una reunión con los docentes y después dar solución","q10":"."},
-{"ts":"3/09/2026 19:55","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Eduardo Diez Canseco","sede":"Wilson","marca":"Idat","q4_1":4,"q4_2":4,"q5_1":4,"q5_2":4,"q5_3":4,"q6_1":4,"q6_2":4,"q7":"Preparado(a)","q8":7,"q9":"todo bien","q10":"todo ok"},
-{"ts":"3/09/2026 19:58","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Eduardo Diez Canseco","sede":"Wilson","marca":"Idat","q4_1":5,"q4_2":5,"q5_1":5,"q5_2":5,"q5_3":5,"q6_1":5,"q6_2":5,"q7":"Muy preparado(a)","q8":10,"q9":"Evaluaciones","q10":"Evaluaciones"},
-{"ts":"3/09/2026 19:59","fecha":"IES 2026-III (07/09/2026)","cond":"Continuador","cap":"Eduardo Diez Canseco","sede":"Wilson","marca":"Idat","q4_1":5,"q4_2":5,"q5_1":5,"q5_2":5,"q5_3":5,"q6_1":5,"q6_2":5,"q7":"Muy preparado(a)","q8":10,"q9":"Las capacitaciones","q10":"Las justificaciones"}
-];
+(function () {
+  "use strict";
 
-var SKIP_TEMAS = ['ninguno','nada por el momento','para mi ninguno','perfecto','todo bien','todo claro',
-  'todo muy claro','todo conforme','todo ok','todo correcto y claro.','está bien','.'];
-
-var TEMA_NORM = {
-  'uso de la plataforma eva': 'Plataforma EVA',
-  'uso de plataforma': 'Plataforma EVA',
-  'la forma de evaluar': 'Sistema de evaluación',
-  'evaluaciones': 'Sistema de evaluación',
-  'sistema de evaluación escuela': 'Sistema de evaluación',
-  'programación': 'Programación docente',
-  'reforzar programación docente y evitar cierre de aulas': 'Programación docente',
-  'la reprogramacion de clases': 'Reprogramación de clases',
-  'temas nuevos para docentes antiguos': 'Temas para doc. continuadores',
-  'hay varios aspectos y temas que deben de recabar en una reunión con los docentes y después dar solución': 'Mejoras en la reunión',
-  'asistencia de estudiantes': 'Asistencia de estudiantes',
-  'capacitaciones': 'Capacitaciones adicionales',
-  'las capacitaciones': 'Capacitaciones adicionales',
-  'las justificaciones': 'Justificaciones / inasistencias'
-};
-
-// pre-calcular promedio por registro
-RAW_DATA.forEach(function(r) {
-  r.prom = (r.q4_1 + r.q4_2 + r.q5_1 + r.q5_2 + r.q5_3 + r.q6_1 + r.q6_2) / 7;
-});
-
-// ===== helpers =====
-function unique(arr) { return arr.filter(function(v,i){ return arr.indexOf(v) === i; }); }
-function avg(arr) { return arr.length ? arr.reduce(function(a,b){return a+b;},0) / arr.length : 0; }
-function round2(n) { return Math.round(n*100)/100; }
-
-function npsCalc(scores) {
-  var promo = scores.filter(function(s){return s>=9;}).length;
-  var det   = scores.filter(function(s){return s<=6;}).length;
-  var pas   = scores.length - promo - det;
-  var nps   = scores.length ? Math.round((promo/scores.length - det/scores.length)*100) : 0;
-  return { promo: promo, pas: pas, det: det, nps: nps };
-}
-
-// ===== poblar selects de filtros =====
-function populateFilters() {
-  var fechas = unique(RAW_DATA.map(function(r){ return r.fecha; }));
-  var sups   = unique(RAW_DATA.map(function(r){ return r.cap; })).sort(function(a,b){ return a.localeCompare(b,'es'); });
-
-  var selFecha = document.getElementById('f-fecha');
-  fechas.forEach(function(f) {
-    var opt = document.createElement('option');
-    opt.value = f; opt.textContent = f;
-    selFecha.appendChild(opt);
-  });
-
-  var selSup = document.getElementById('f-sup');
-  sups.forEach(function(s) {
-    var opt = document.createElement('option');
-    opt.value = s; opt.textContent = s;
-    selSup.appendChild(opt);
-  });
-}
-
-// ===== filtrado =====
-function getFiltered() {
-  var fFecha = document.getElementById('f-fecha').value;
-  var fSup   = document.getElementById('f-sup').value;
-  return RAW_DATA.filter(function(r) {
-    if (fFecha && r.fecha !== fFecha) return false;
-    if (fSup && r.cap !== fSup) return false;
-    return true;
-  });
-}
-
-function updateFilterStatus() {
-  var fFecha = document.getElementById('f-fecha').value;
-  var fSup   = document.getElementById('f-sup').value;
-  var statusEl = document.getElementById('filter-status');
-  var parts = [];
-  if (fFecha) parts.push('Semana: ' + fFecha);
-  if (fSup)   parts.push('Supervisor: ' + fSup);
-  if (parts.length) {
-    statusEl.textContent = 'Filtro activo — ' + parts.join(' · ');
-    statusEl.className = 'filter-status active';
-  } else {
-    statusEl.textContent = 'Sin filtros aplicados — mostrando todos los registros.';
-    statusEl.className = 'filter-status';
-  }
-}
-
-// ===== render principal =====
-function applyFilters() {
-  var data = getFiltered();
-  updateFilterStatus();
-  render(data);
-}
-
-function clearFilters() {
-  document.getElementById('f-fecha').value = '';
-  document.getElementById('f-sup').value = '';
-  applyFilters();
-}
-
-function refreshData() {
-  var btn = document.getElementById('btn-refresh');
-  var statusEl = document.getElementById('filter-status');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spin"></span> Actualizando…';
-  setTimeout(function() {
-    // Vuelve a aplicar los filtros sobre los datos actualmente cargados en el dashboard.
-    // Nota: este botón refresca la vista con los filtros vigentes; para traer
-    // respuestas NUEVAS del Google Sheet, pide en el chat de Claude "actualiza
-    // el dashboard con las últimas respuestas" y se regenerará este archivo
-    // con los registros más recientes de la hoja.
-    applyFilters();
-    btn.disabled = false;
-    btn.innerHTML = '↻ Actualizar';
-  }, 500);
-}
-
-function render(data) {
-  var n = data.length;
-  document.getElementById('badge-n').textContent = 'n = ' + n;
-
-  if (n === 0) {
-    ['dim-chart','items-chart','q7-chart','hist-nps','temas-total'].forEach(function(id){
-      document.getElementById(id).innerHTML = '<div class="empty-state">No hay respuestas para este filtro.</div>';
-    });
-    document.getElementById('cap-table').innerHTML = '<tr><td colspan="6" class="empty-state">No hay respuestas para este filtro.</td></tr>';
-    document.getElementById('kpi-prom').textContent = '—';
-    document.getElementById('kpi-nps').textContent = '—';
-    document.getElementById('kpi-nps-sub').textContent = '—';
-    document.getElementById('kpi-det').textContent = '—';
-    document.getElementById('kpi-det-sub').textContent = '—';
-    document.getElementById('kpi-prep').textContent = '—';
-    return;
-  }
-
-  // KPIs
-  var promGlobal = round2(avg(data.map(function(r){return r.prom;})));
-  var q8all = data.map(function(r){return r.q8;});
-  var npsRes = npsCalc(q8all);
-  var prep = data.filter(function(r){ return r.q7 === 'Preparado(a)' || r.q7 === 'Muy preparado(a)'; }).length;
-
-  document.getElementById('kpi-prom').textContent = promGlobal.toFixed(2);
-  document.getElementById('kpi-nps').textContent = (npsRes.nps>=0?'+':'') + npsRes.nps;
-  document.getElementById('kpi-nps').style.color = npsRes.nps >= 30 ? 'var(--nps-good)' : npsRes.nps >= 0 ? 'var(--nps-warn)' : 'var(--nps-crit)';
-  document.getElementById('kpi-nps-sub').textContent = npsRes.promo + ' Promotores · ' + npsRes.pas + ' Pasivos · ' + npsRes.det + ' Detractor' + (npsRes.det!==1?'es':'');
-  var pctDet = round2(npsRes.det/n*100);
-  document.getElementById('kpi-det').textContent = pctDet + '%';
-  document.getElementById('kpi-det-sub').textContent = npsRes.det + ' de ' + n + ' encuestados (nota ≤ 6)';
-  document.getElementById('kpi-prep').textContent = round2(prep/n*100) + '%';
-
-  // Dimensiones
-  var dimSat = avg(data.map(function(r){ return (r.q4_1+r.q4_2)/2; }));
-  var dimCla = avg(data.map(function(r){ return (r.q5_1+r.q5_2+r.q5_3)/3; }));
-  var dimOrg = avg(data.map(function(r){ return (r.q6_1+r.q6_2)/2; }));
-  renderDims([
-    {name:'Satisfacción general', val: round2(dimSat)},
-    {name:'Claridad de la información', val: round2(dimCla)},
-    {name:'Organización y oportunidad', val: round2(dimOrg)}
-  ]);
-
-  // Items
-  var itemDefs = [
-    {key:'q4_1', name:'Q4_1 Expectativas cumplidas', dim:'Satisfacción'},
-    {key:'q4_2', name:'Q4_2 Aclaró aspectos importantes', dim:'Satisfacción'},
-    {key:'q5_1', name:'Q5_1 Temas claros y ordenados', dim:'Claridad'},
-    {key:'q5_2', name:'Q5_2 Ejemplos facilitaron comprensión', dim:'Claridad'},
-    {key:'q5_3', name:'Q5_3 Espacios de consulta (dudas)', dim:'Claridad'},
-    {key:'q6_1', name:'Q6_1 Duración adecuada', dim:'Organización'},
-    {key:'q6_2', name:'Q6_2 Organización facilitó part.', dim:'Organización'}
+  // ===================================================================
+  // ORIGEN DE DATOS — lectura directa del Google Sheet
+  // ===================================================================
+  // Hoja publicada en la web (Archivo → Compartir → Publicar en la web → CSV).
+  // Es una URL pública: el navegador del usuario la lee directamente,
+  // sin pasar por Claude, sin conector y sin ningún archivo local.
+  var FUENTES = [
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vTfjeX03Luz70ka6aA438ybmiyC35Mr8_6ZQjPdacHZ6cgdpPACuIGiIL_NZh96t0m2RPVKrg336nUi/pub?gid=313791498&single=true&output=csv'
   ];
-  var items = itemDefs.map(function(it) {
-    return { name: it.name, dim: it.dim, val: round2(avg(data.map(function(r){ return r[it.key]; }))) };
-  }).sort(function(a,b){ return a.val - b.val; });
-  renderItems(items);
 
-  // Q7
-  var q7groups = {};
-  data.forEach(function(r) { q7groups[r.q7] = (q7groups[r.q7]||0) + 1; });
-  renderQ7(q7groups, n);
+  var AUTO_AL_ABRIR = true;   // intenta refrescar solo al abrir el archivo
 
-  // Histograma NPS
-  var hist = [];
-  for (var i=0;i<=10;i++) hist.push(data.filter(function(r){return r.q8===i;}).length);
-  renderHist(hist);
+  var ALL = JSON.parse(document.getElementById('dashboard-data').textContent);
+  var tooltip = document.getElementById('tooltip');
 
-  // Temas
-  var temaCounts = {};
-  data.forEach(function(r) {
-    [r.q9, r.q10].forEach(function(t) {
-      var clean = (t||'').trim().toLowerCase();
-      if (!clean || clean.length <= 1 || SKIP_TEMAS.indexOf(clean) !== -1) return;
-      var norm = TEMA_NORM[clean] || (t.trim().charAt(0).toUpperCase() + t.trim().slice(1));
-      temaCounts[norm] = (temaCounts[norm]||0) + 1;
+  function css(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+  function fmt1(n) { return (Math.round(n * 10) / 10).toFixed(1); }
+  function fmt2(n) { return (Math.round(n * 100) / 100).toFixed(2); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function sinAcentos(s) { return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+
+  function showTip(el, html) {
+    el.addEventListener('mousemove', function (e) {
+      tooltip.innerHTML = html;
+      tooltip.style.left = e.clientX + 'px';
+      tooltip.style.top = e.clientY + 'px';
+      tooltip.classList.add('show');
     });
-  });
-  var temaArr = Object.keys(temaCounts).map(function(k){ return [k, temaCounts[k]]; })
-    .sort(function(a,b){ return b[1]-a[1]; }).slice(0,10);
-  renderTemas(temaArr);
-
-  // Tabla capacitadores (agrupado por Supervisor+Marca+Sede dentro del filtro activo)
-  var groups = {};
-  data.forEach(function(r) {
-    var key = r.cap + '|' + r.marca + '|' + r.sede;
-    if (!groups[key]) groups[key] = { cap:r.cap, marca:r.marca, sede:r.sede, rows: [] };
-    groups[key].rows.push(r);
-  });
-  var capRows = Object.keys(groups).map(function(k) {
-    var g = groups[k];
-    var gn = g.rows.length;
-    var gprom = round2(avg(g.rows.map(function(r){return r.prom;})));
-    var gnps = npsCalc(g.rows.map(function(r){return r.q8;})).nps;
-    return { cap:g.cap, marca:g.marca, sede:g.sede, n:gn, prom:gprom, nps:gnps, low: gn<3 };
-  }).sort(function(a,b) {
-    var c = a.cap.localeCompare(b.cap,'es');
-    return c !== 0 ? c : a.marca.localeCompare(b.marca,'es');
-  });
-  renderCaps(capRows);
-}
-
-function renderDims(dims) {
-  var el = document.getElementById('dim-chart');
-  var html = '';
-  dims.forEach(function(d) {
-    var pct = (d.val/5*100).toFixed(1);
-    html += '<div class="bar-wrap">';
-    html += '<div class="bar-header"><span class="bar-label">'+d.name+'</span></div>';
-    html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">';
-    html += '<span style="font-size:11px;width:38px;color:var(--idat-c);font-weight:600">Idat</span>';
-    html += '<div class="bar-track" style="flex:1"><div class="bar-fill" style="width:'+pct+'%;background:var(--idat-c)" data-tip="Idat: '+d.val+' / 5"></div></div>';
-    html += '<span class="bar-val" style="color:var(--idat-c)">'+d.val.toFixed(2)+'</span>';
-    html += '</div></div>';
-  });
-  el.innerHTML = html;
-}
-
-function renderItems(items) {
-  var el = document.getElementById('items-chart');
-  var vals = items.map(function(i){return i.val;});
-  var minV = Math.min.apply(null, vals) - 0.15;
-  var maxV = 5;
-  var html = '';
-  items.forEach(function(it) {
-    var pct = ((it.val - minV) / (maxV - minV) * 100);
-    if (pct < 2) pct = 2;
-    var color = it.val < 4.6 ? 'var(--nps-warn)' : 'var(--slate-c)';
-    html += '<div class="bar-wrap">';
-    html += '<div class="bar-header"><span class="bar-label" style="font-size:11.5px">'+it.name+'</span><span class="bar-val" style="font-size:13px;color:'+color+'">'+it.val.toFixed(2)+'</span></div>';
-    html += '<div class="bar-track"><div class="bar-fill" style="width:'+pct.toFixed(1)+'%;background:'+color+'" data-tip="'+it.name+': '+it.val+' / 5 — '+it.dim+'"></div></div>';
-    html += '</div>';
-  });
-  el.innerHTML = html;
-}
-
-function renderQ7(groups, n) {
-  var el = document.getElementById('q7-chart');
-  var order = ['Muy preparado(a)','Preparado(a)','Medianamente','Poco','Nada'];
-  var colors = ['#b84519','#eb9e78','#f2c9b0','#d4d4d4','#a3a3a3'];
-  var html = '<div class="stacked-bar">';
-  var labelHtml = '';
-  order.forEach(function(key, idx) {
-    var cnt = groups[key];
-    if (!cnt) return;
-    var pct = (cnt/n*100);
-    html += '<div class="stacked-seg" style="width:'+pct.toFixed(1)+'%;background:'+colors[idx]+'">';
-    html += pct >= 8 ? Math.round(pct)+'%' : '';
-    html += '<div class="seg-tip">'+key+': '+cnt+' — '+pct.toFixed(1)+'%</div></div>';
-    labelHtml += '<span><span class="seg-dot" style="background:'+colors[idx]+'"></span>'+key+' '+Math.round(pct)+'%</span>';
-  });
-  html += '</div>';
-  el.innerHTML = html + '<div class="seg-label-row">'+labelHtml+'</div>';
-}
-
-function renderHist(hist) {
-  var el = document.getElementById('hist-nps');
-  var maxC = Math.max.apply(null, hist);
-  var colors = ['var(--nps-crit)','var(--nps-crit)','var(--nps-crit)','var(--nps-crit)','var(--nps-crit)','var(--nps-crit)','var(--nps-crit)','var(--nps-warn)','var(--nps-warn)','var(--nps-good)','var(--nps-good)'];
-  var html = '<div class="hist-wrap">';
-  for (var i=0;i<=10;i++) {
-    var cnt = hist[i];
-    var h = maxC > 0 ? Math.max(4, (cnt/maxC)*82) : 4;
-    html += '<div class="hist-col">';
-    html += '<div class="hist-bar" style="height:'+h+'px;background:'+colors[i]+';opacity:'+(cnt===0?'.15':'.9')+'" data-tip="Nota '+i+': '+cnt+' docente'+(cnt!==1?'s':'')+'"></div>';
-    html += '<div class="hist-x">'+i+'</div>';
-    html += '</div>';
+    el.addEventListener('mouseleave', function () { tooltip.classList.remove('show'); });
   }
-  html += '</div>';
-  el.innerHTML = html;
-}
 
-function renderTemas(arr) {
-  var el = document.getElementById('temas-total');
-  if (!arr.length) { el.innerHTML = '<div class="empty-state">Sin menciones de temas para este filtro.</div>'; return; }
-  var maxC = arr[0][1];
-  var html = '';
-  arr.forEach(function(t,i) {
-    var pct = (t[1]/maxC*100).toFixed(0);
-    html += '<div class="tema-row">';
-    html += '<div class="tema-rank">'+(i+1)+'</div>';
-    html += '<div class="tema-name">'+t[0]+'</div>';
-    html += '<div class="tema-bar-wrap"><div class="tema-bar" style="width:'+pct+'%;background:var(--slate-c);opacity:.7"></div></div>';
-    html += '<div class="tema-cnt">'+t[1]+'x</div>';
-    html += '</div>';
+  var ITEM_DEFS = [
+    { key:'q4_1', label:'La bienvenida cumplió con mis expectativas',        frag:'cumplio con mis expectativas' },
+    { key:'q4_2', label:'Aclaró aspectos importantes para el inicio',        frag:'aclarar aspectos importantes' },
+    { key:'q5_1', label:'Temas explicados de forma clara y ordenada',        frag:'clara y ordenada' },
+    { key:'q5_2', label:'Explicaciones y ejemplos facilitaron la comprensión', frag:'facilitaron la comprension' },
+    { key:'q5_3', label:'Espacios de consulta resolvieron mis dudas',        frag:'espacios para consultas' },
+    { key:'q6_1', label:'La duración fue adecuada para los temas',           frag:'duracion de la actividad' },
+    { key:'q6_2', label:'La organización facilitó mi participación',         frag:'facilito mi participacion' }
+  ];
+  var PREP_LABELS = ['Nada preparado(a)','Poco preparado(a)','Medianamente preparado(a)','Preparado(a)','Muy preparado(a)'];
+
+  var SKIP_TEMAS = ['ninguno','ninguna','ningunos','nada por el momento','para mi ninguno','ninguno, por el momento',
+    'perfecto','todo bien','todo claro','todo muy claro','todo conforme','todo ok','todo correcto y claro',
+    'todo correcto y claro.','todo bien.','esta bien','está bien','por ahora claro','me parece claro','sin comentarios',
+    'muy bien todo','todo ha estado claro para mi.','todos','todo completo','.','..','-','','todo bien.',
+    'todos los que necesito se han brindado.','ninguno. todos esta muy claros.',
+    'como indique todos los temas han sido explicados correctamente.'];
+
+  var TEMA_NORM = {
+    'uso de la plataforma eva':'Plataforma EVA / Aula Virtual',
+    'uso de plataforma':'Plataforma EVA / Aula Virtual',
+    'el uso de los recursos en el aula virtual':'Plataforma EVA / Aula Virtual',
+    'plataformas. digitales':'Plataforma EVA / Aula Virtual',
+    'sugiero utilizar mas pantallazos del sistema eva y menos texto':'Plataforma EVA / Aula Virtual',
+    'lo relacionado con examenes y como crearlos en eva, como evitar plagio en cursos virtuales':'Exámenes en EVA y control de plagio',
+    'la forma de evaluar':'Sistema de evaluación',
+    'evaluaciones':'Sistema de evaluación',
+    'sistema de evaluacion escuela':'Sistema de evaluación',
+    'el sistema de evaluacion':'Sistema de evaluación',
+    'la modalidad del evaluacion docente':'Evaluación docente',
+    'evaluacion de desempeno':'Evaluación docente',
+    'programacion':'Programación docente',
+    'reforzar programacion docente y evitar cierre de aulas':'Programación docente',
+    'la programacion de cargas horarias.':'Programación y cargas horarias',
+    'los horarios por curso por secciones a detalle sesiones a desarrolar por fechas.':'Programación y cargas horarias',
+    'la reprogramacion de clases':'Reprogramación de clases',
+    'temas nuevos para docentes antiguos':'Temas nuevos para continuadores',
+    'asistencia de estudiantes':'Asistencia de estudiantes',
+    'la toma de asistencia a clase':'Asistencia de estudiantes',
+    'capacitaciones':'Capacitaciones adicionales',
+    'las capacitaciones':'Capacitaciones adicionales',
+    'capacitaciones para los docentes':'Capacitaciones adicionales',
+    'muchas gracias por la capacitacion, la parte de las capacitaciones para los docentes':'Capacitaciones adicionales',
+    'las justificaciones':'Justificaciones e inasistencias',
+    'justificacion de las inasistencias de los alumnos':'Justificaciones e inasistencias',
+    'actividades de inclusion para los alumnos':'Inclusión y barreras de aprendizaje',
+    'sobre la atencion a estudiantes con barreras':'Inclusión y barreras de aprendizaje',
+    'el ingreso de notas':'Registro e ingreso de notas',
+    'registro de notas en eva':'Registro e ingreso de notas',
+    'subida de notas':'Registro e ingreso de notas',
+    'como ingresar la nota 0 de estudiantes que no rinden evaluacion':'Registro e ingreso de notas',
+    'la parte de subir materiales':'Materiales y recursos pedagógicos',
+    'debe de compartir materiales':'Materiales y recursos pedagógicos',
+    'debe de compartirse materiales.':'Materiales y recursos pedagógicos',
+    'el tema de la organizacion de los materiales pedagogicos en la plataforma':'Materiales y recursos pedagógicos',
+    'un material para la sesion de clase para reforzar la estructura.':'Materiales y recursos pedagógicos',
+    'metodologia':'Metodología y orientación docente',
+    'orientacion docente':'Metodología y orientación docente',
+    'comentar sobre casuistica de consultas docentes':'Casuística de consultas docentes'
+  };
+
+  // ===================================================================
+  // Lectura remota del Sheet
+  // ===================================================================
+  function parseCSV(texto) {
+    var filas = [], campo = '', fila = [], dentro = false;
+    for (var i = 0; i < texto.length; i++) {
+      var ch = texto[i];
+      if (dentro) {
+        if (ch === '"') {
+          if (texto[i + 1] === '"') { campo += '"'; i++; }
+          else dentro = false;
+        } else campo += ch;
+      } else if (ch === '"') dentro = true;
+      else if (ch === ',') { fila.push(campo); campo = ''; }
+      else if (ch === '\n') { fila.push(campo); filas.push(fila); fila = []; campo = ''; }
+      else if (ch !== '\r') campo += ch;
+    }
+    if (campo.length || fila.length) { fila.push(campo); filas.push(fila); }
+    return filas.filter(function (f) { return f.some(function (c) { return c.trim(); }); });
+  }
+
+  function mapearFilas(filas) {
+    if (!filas.length) throw new Error('La hoja llegó vacía.');
+    var H = filas[0].map(sinAcentos);
+    function buscar(frag, req) {
+      for (var i = 0; i < H.length; i++) if (H[i].indexOf(frag) !== -1) return i;
+      if (req) throw new Error('No se encontró la columna: "' + frag + '"');
+      return -1;
+    }
+    var idx = {
+      fecha: buscar('fecha de inicio', true),
+      cond:  buscar('condicion docente', true),
+      cap:   buscar('quien te brindo', true),
+      marca: buscar('marca a que perteneces', true),
+      q7:    buscar('que tan preparado', true),
+      q8:    buscar('escala del 0 al 10', true)
+    };
+    ITEM_DEFS.forEach(function (d) { idx[d.key] = buscar(d.frag, true); });
+
+    var temas = [];
+    H.forEach(function (h, i) { if (h.indexOf('reforzarse') !== -1) temas.push(i); });
+    idx.q9 = temas[0]; idx.q10 = temas.length > 1 ? temas[1] : temas[0];
+
+    var out = [];
+    for (var r = 1; r < filas.length; r++) {
+      var f = filas[r];
+      var capRaw = (f[idx.cap] || '').trim();
+      var m = /^(.*?)\s*\((.*)\)\s*$/.exec(capRaw);
+      var rec = {
+        fecha: (f[idx.fecha] || '').trim(),
+        cond:  (f[idx.cond] || '').trim(),
+        cap:   m ? m[1].trim() : capRaw,
+        sede:  m ? m[2].trim() : '',
+        marca: (f[idx.marca] || '').trim(),
+        q7:    (f[idx.q7] || '').trim(),
+        q8:    parseInt(f[idx.q8], 10),
+        q9:    (f[idx.q9] || '').trim(),
+        q10:   (f[idx.q10] || '').trim()
+      };
+      var ok = !isNaN(rec.q8) && rec.cap;
+      ITEM_DEFS.forEach(function (d) {
+        rec[d.key] = parseInt(f[idx[d.key]], 10);
+        if (isNaN(rec[d.key])) ok = false;
+      });
+      if (ok) out.push(rec);
+    }
+    if (!out.length) throw new Error('No se pudo leer ninguna respuesta válida.');
+    return out;
+  }
+
+  function traerRemoto() {
+    if (!FUENTES.length) return Promise.reject(new Error('no hay URL configurada'));
+    var url = FUENTES[0] + '&_=' + Date.now();
+    return fetch(url, { cache: 'no-store' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.text();
+      })
+      .then(function (txt) {
+        if (/^\s*<(!DOCTYPE|html)/i.test(txt)) throw new Error('la URL no devolvió un CSV');
+        return mapearFilas(parseCSV(txt));
+      });
+  }
+
+  function sello(txt, cls) {
+    var b = document.getElementById('badge-sync');
+    b.textContent = txt;
+    b.className = 'badge' + (cls ? ' ' + cls : '');
+  }
+
+  function horaAhora() {
+    var d = new Date();
+    function p(n) { return (n < 10 ? '0' : '') + n; }
+    return p(d.getDate()) + '/' + p(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+  }
+
+  function aplicarNuevos(filas, origen) {
+    ALL = filas;
+    ALL.forEach(function (r) {
+      r.prom = ITEM_DEFS.reduce(function (a, d) { return a + r[d.key]; }, 0) / ITEM_DEFS.length;
+    });
+    poblarFiltros();
+    run();
+    sello('Actualizado ' + horaAhora() + ' · ' + ALL.length + ' respuestas' + (origen ? ' · ' + origen : ''), 'ok');
+  }
+
+  function actualizar(silencioso) {
+    var btn = document.getElementById('btn-refresh');
+    var original = '↻ Actualizar';
+    if (!silencioso) { btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Leyendo el Sheet…'; }
+    return traerRemoto()
+      .then(function (filas) { aplicarNuevos(filas, 'desde Google Sheets'); })
+      .catch(function (err) {
+        sello('Sin conexión a la hoja publicada · usando datos incluidos en el archivo', 'warn');
+        if (!silencioso) {
+          document.getElementById('fstatus').textContent =
+            'No se pudo leer la hoja publicada en este momento (' + (err && err.message ? err.message : 'sin respuesta') +
+            '). Verifique su conexión a internet y presione Actualizar de nuevo.';
+        }
+      })
+      .then(function () { if (!silencioso) { btn.disabled = false; btn.innerHTML = original; } });
+  }
+
+  // ===================================================================
+  // Utilidades de cálculo
+  // ===================================================================
+  function uniq(a) { return a.filter(function (v, i) { return a.indexOf(v) === i; }); }
+  function mean(a) { return a.length ? a.reduce(function (x, y) { return x + y; }, 0) / a.length : 0; }
+  function npsOf(s) {
+    var n = s.length;
+    if (!n) return { score:0, promotores:0, pasivos:0, detractores:0, n:0, avg:0 };
+    var p = s.filter(function (x) { return x >= 9; }).length;
+    var d = s.filter(function (x) { return x <= 6; }).length;
+    return { score:(p / n - d / n) * 100, promotores:p, pasivos:n - p - d, detractores:d, n:n, avg:mean(s) };
+  }
+  function brandColor(b) { return b === 'Zegel' ? css('--zegel') : css('--idat'); }
+
+  ALL.forEach(function (r) {
+    r.prom = ITEM_DEFS.reduce(function (a, d) { return a + r[d.key]; }, 0) / ITEM_DEFS.length;
   });
-  el.innerHTML = html;
-}
 
-function renderCaps(rows) {
-  var tbody = document.getElementById('cap-table');
-  if (!rows.length) { tbody.innerHTML = '<tr><td colspan="6" class="empty-state">No hay respuestas para este filtro.</td></tr>'; return; }
-  var html = '';
-  rows.forEach(function(c) {
-    var pill;
-    if (c.prom >= 4.1) pill = '<span class="prom-pill prom-green">'+c.prom.toFixed(2)+'</span>';
-    else if (c.prom >= 3.8) pill = '<span class="prom-pill prom-amber">'+c.prom.toFixed(2)+'</span>';
-    else pill = '<span class="prom-pill prom-red">'+c.prom.toFixed(2)+'</span>';
+  // ===================================================================
+  // Filtros
+  // ===================================================================
+  var selFecha = document.getElementById('f-fecha');
+  var selSup = document.getElementById('f-sup');
 
-    var marcaPill = c.marca === 'Idat' ? '<span class="pill-idat">Idat</span>' : '<span class="pill-zegel">Zegel</span>';
-    var npsColor = c.nps >= 50 ? 'var(--nps-good)' : c.nps >= 20 ? 'var(--tx-primary)' : 'var(--nps-crit)';
-    var npsStr = (c.nps>=0?'+':'') + c.nps;
+  function fechaKey(f) {
+    var m = /(\d{1,2})\/(\d{2})\/(\d{4})/.exec(f);
+    return m ? (m[3] + m[2] + ('0' + m[1]).slice(-2)) : f;
+  }
 
-    html += '<tr class="'+(c.low?'row-low':'')+'">';
-    html += '<td>'+(c.low?'<span title="Muestra insuficiente (n&lt;3)">*</span> ':'')+c.cap+'</td>';
-    html += '<td>'+marcaPill+'</td>';
-    html += '<td>'+c.sede+'</td>';
-    html += '<td style="text-align:center">'+c.n+'</td>';
-    html += '<td>'+pill+'</td>';
-    html += '<td style="font-weight:700;color:'+npsColor+'">'+npsStr+'</td>';
-    html += '</tr>';
+  function poblarFiltros() {
+    var prevF = selFecha.value, prevS = selSup.value;
+    selFecha.innerHTML = '<option value="">Todas las fechas</option>';
+    selSup.innerHTML = '<option value="">Todos los supervisores</option>';
+
+    var fechas = uniq(ALL.map(function (r) { return r.fecha; }))
+      .sort(function (a, b) { return fechaKey(a) < fechaKey(b) ? -1 : 1; });
+    fechas.forEach(function (f) {
+      var o = document.createElement('option'); o.value = f; o.textContent = f; selFecha.appendChild(o);
+    });
+    uniq(ALL.map(function (r) { return r.cap; }))
+      .sort(function (a, b) { return a.localeCompare(b, 'es'); })
+      .forEach(function (s) {
+        var o = document.createElement('option'); o.value = s; o.textContent = s; selSup.appendChild(o);
+      });
+
+    if (prevF && fechas.indexOf(prevF) !== -1) selFecha.value = prevF;
+    if (prevS) selSup.value = prevS;
+
+    document.getElementById('badge-periodos').textContent =
+      fechas.length + (fechas.length === 1 ? ' semana de clases' : ' semanas de clases') + ': ' + fechas.join(' · ');
+  }
+
+  function filtered() {
+    var ff = selFecha.value, fs = selSup.value;
+    return ALL.filter(function (r) {
+      if (ff && r.fecha !== ff) return false;
+      if (fs && r.cap !== fs) return false;
+      return true;
+    });
+  }
+
+  function paintStatus() {
+    var el = document.getElementById('fstatus');
+    var partes = [];
+    if (selFecha.value) partes.push('Semana ' + selFecha.value);
+    if (selSup.value) partes.push('Supervisor: ' + selSup.value);
+    if (partes.length) { el.textContent = 'Filtro activo — ' + partes.join(' · '); el.className = 'fstatus on'; }
+    else { el.textContent = 'Sin filtros — mostrando todas las respuestas registradas.'; el.className = 'fstatus'; }
+  }
+
+  selFecha.addEventListener('change', run);
+  selSup.addEventListener('change', run);
+  document.getElementById('btn-clear').addEventListener('click', function () {
+    selFecha.value = ''; selSup.value = ''; run();
   });
-  tbody.innerHTML = html;
-}
+  document.getElementById('btn-refresh').addEventListener('click', function () { actualizar(false); });
 
-function toggleTheme() {
-  var html = document.documentElement;
-  var cur = html.getAttribute('data-theme');
-  html.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
-}
+  function clear(id) { var e = document.getElementById(id); if (e) e.innerHTML = ''; }
 
-// ===== INIT =====
-populateFilters();
-render(RAW_DATA);
-updateFilterStatus();
+  function temasDe(rows) {
+    var counts = {};
+    rows.forEach(function (r) {
+      [r.q9, r.q10].forEach(function (t) {
+        var raw = (t || '').trim();
+        var low = sinAcentos(raw).replace(/\s+/g, ' ').trim();
+        if (!raw || raw.length <= 2 || SKIP_TEMAS.indexOf(low) !== -1) return;
+        var norm = TEMA_NORM[low];
+        if (!norm) {
+          if (raw.length > 60) return;               // comentarios largos, no son un tema
+          norm = raw.charAt(0).toUpperCase() + raw.slice(1).toLowerCase();
+        }
+        counts[norm] = (counts[norm] || 0) + 1;
+      });
+    });
+    return Object.keys(counts).map(function (k) { return { tema:k, n:counts[k] }; })
+      .sort(function (a, b) { return b.n - a.n || a.tema.localeCompare(b.tema, 'es'); });
+  }
+
+  // ===================================================================
+  // Render
+  // ===================================================================
+  function run() {
+    var D = filtered();
+    paintStatus();
+
+    document.getElementById('badge-n').textContent =
+      D.length + (D.length === 1 ? ' encuesta' : ' encuestas') +
+      (D.length ? ' · ' + uniq(D.map(function (r) { return r.marca; })).sort().join(' / ') : '');
+
+    ['chart-promedio','chart-nps','chart-nps-stack','chart-dims','chart-items','chart-prep',
+     'chart-hist','cond-stats','chart-temas','temas-por-marca','legend-dims','hallazgos','recomendaciones']
+      .forEach(clear);
+    document.querySelector('#tabla-capacitadores tbody').innerHTML = '';
+
+    if (!D.length) {
+      ['chart-promedio','chart-nps','chart-nps-stack','chart-dims','chart-items','chart-prep',
+       'chart-hist','cond-stats','chart-temas','temas-por-marca','hallazgos'].forEach(function (id) {
+        document.getElementById(id).innerHTML = '<div class="empty">No hay respuestas para este filtro.</div>';
+      });
+      document.querySelector('#tabla-capacitadores tbody').innerHTML =
+        '<tr><td colspan="6" class="empty">No hay respuestas para este filtro.</td></tr>';
+      ['kpi-promedio','kpi-nps','kpi-det','kpi-prep'].forEach(function (id) { document.getElementById(id).textContent = '–'; });
+      ['kpi-prom-split','kpi-nps-split'].forEach(function (id) { document.getElementById(id).textContent = ''; });
+      document.getElementById('kpi-det-pct').textContent = '–';
+      document.getElementById('kpi-prep-not').textContent = '–';
+      return;
+    }
+
+    var brands = uniq(D.map(function (r) { return r.marca; })).sort();
+    var promGeneral = mean(D.map(function (r) { return r.prom; }));
+    var npsTotal = npsOf(D.map(function (r) { return r.q8; }));
+    var prepOk = D.filter(function (r) { return /^(muy )?preparado/i.test(sinAcentos(r.q7)); }).length;
+    var prepPct = prepOk / D.length * 100;
+
+    document.getElementById('kpi-promedio').textContent = fmt2(promGeneral);
+    document.getElementById('kpi-prom-split').innerHTML = brands.map(function (b) {
+      var sub = D.filter(function (r) { return r.marca === b; });
+      return b + ' <b class="tnum">' + fmt2(mean(sub.map(function (r) { return r.prom; }))) + '</b>';
+    }).join(' · ');
+
+    document.getElementById('kpi-nps').textContent = fmt1(npsTotal.score);
+    document.getElementById('kpi-nps-split').innerHTML = brands.map(function (b) {
+      var s = npsOf(D.filter(function (r) { return r.marca === b; }).map(function (r) { return r.q8; }));
+      return b + ' <b class="tnum">' + fmt1(s.score) + '</b>';
+    }).join(' vs ');
+
+    document.getElementById('kpi-det').textContent = npsTotal.detractores;
+    document.getElementById('kpi-det-pct').textContent = fmt1(npsTotal.detractores / D.length * 100) + '%';
+    document.getElementById('kpi-prep').textContent = fmt1(prepPct) + '%';
+    document.getElementById('kpi-prep-not').textContent = fmt1(100 - prepPct) + '%';
+
+    // Promedio por marca
+    (function () {
+      var el = document.getElementById('chart-promedio');
+      brands.forEach(function (b) {
+        var sub = D.filter(function (r) { return r.marca === b; });
+        var v = mean(sub.map(function (r) { return r.prom; }));
+        var row = document.createElement('div');
+        row.className = 'bar-row';
+        row.innerHTML = '<div class="rlabel">' + esc(b) + '</div>' +
+          '<div class="bar-track"><div class="bar-fill" style="width:' + (v / 5 * 100).toFixed(1) + '%;background:' + brandColor(b) + '"></div></div>' +
+          '<div class="rvalue tnum">' + fmt2(v) + '</div>';
+        el.appendChild(row);
+        showTip(row.querySelector('.bar-fill'), esc(b) + '<span class="tt-sub">Promedio: ' + fmt2(v) + ' / 5 · n = ' + sub.length + '</span>');
+      });
+      if (brands.length === 1) {
+        el.insertAdjacentHTML('beforeend', '<p class="brandless">Solo hay respuestas de ' + esc(brands[0]) + ' en este filtro; no hay comparativo entre marcas.</p>');
+      }
+    })();
+
+    // NPS por marca
+    (function () {
+      var el = document.getElementById('chart-nps');
+      var vals = brands.map(function (b) { return npsOf(D.filter(function (r) { return r.marca === b; }).map(function (r) { return r.q8; })).score; });
+      var max = Math.max.apply(null, vals.concat([1])) * 1.25;
+      brands.forEach(function (b, i) {
+        var d = npsOf(D.filter(function (r) { return r.marca === b; }).map(function (r) { return r.q8; }));
+        var row = document.createElement('div');
+        row.className = 'bar-row';
+        row.innerHTML = '<div class="rlabel">' + esc(b) + '</div>' +
+          '<div class="bar-track"><div class="bar-fill" style="width:' + Math.max(0, vals[i] / max * 100).toFixed(1) + '%;background:' + brandColor(b) + '"></div></div>' +
+          '<div class="rvalue tnum">' + fmt1(vals[i]) + '</div>';
+        el.appendChild(row);
+        showTip(row.querySelector('.bar-fill'), esc(b) + ' · NPS ' + fmt1(vals[i]) +
+          '<span class="tt-sub">' + d.promotores + ' promotores · ' + d.pasivos + ' pasivos · ' + d.detractores + ' detractores</span>');
+      });
+    })();
+
+    // Composición NPS
+    (function () {
+      var el = document.getElementById('chart-nps-stack');
+      var groups = [{ label:'Total', rows:D }];
+      if (brands.length > 1) brands.forEach(function (b) {
+        groups.push({ label:b, rows:D.filter(function (r) { return r.marca === b; }) });
+      });
+      groups.forEach(function (g) {
+        var d = npsOf(g.rows.map(function (r) { return r.q8; }));
+        var pP = d.promotores / d.n * 100, pA = d.pasivos / d.n * 100, pD = d.detractores / d.n * 100;
+        var row = document.createElement('div');
+        row.className = 'stack-row';
+        row.innerHTML = '<div class="slabel"><span>' + esc(g.label) + '</span><span class="n">n = ' + d.n + '</span></div>' +
+          '<div class="stack-track">' +
+          '<div class="stack-seg" style="width:' + pP + '%;background:' + css('--good') + '"></div>' +
+          '<div class="stack-seg" style="width:' + pA + '%;background:' + css('--warning') + '"></div>' +
+          '<div class="stack-seg" style="width:' + pD + '%;background:' + css('--critical') + '"></div></div>';
+        el.appendChild(row);
+        var s = row.querySelectorAll('.stack-seg');
+        showTip(s[0], 'Promotores<span class="tt-sub">' + d.promotores + ' docentes · ' + fmt1(pP) + '%</span>');
+        showTip(s[1], 'Pasivos<span class="tt-sub">' + d.pasivos + ' docentes · ' + fmt1(pA) + '%</span>');
+        showTip(s[2], 'Detractores<span class="tt-sub">' + d.detractores + ' docentes · ' + fmt1(pD) + '%</span>');
+      });
+    })();
+
+    // Dimensiones
+    (function () {
+      document.getElementById('legend-dims').innerHTML = brands.map(function (b) {
+        return '<span class="legend-item"><span class="swatch" style="background:' + brandColor(b) + '"></span>' + esc(b) + '</span>';
+      }).join('');
+      var dims = [
+        { name:'Satisfacción general', keys:['q4_1','q4_2'] },
+        { name:'Claridad de la información', keys:['q5_1','q5_2','q5_3'] },
+        { name:'Organización y oportunidad', keys:['q6_1','q6_2'] }
+      ];
+      var el = document.getElementById('chart-dims');
+      dims.forEach(function (dim) {
+        var subs = brands.map(function (b) {
+          var rows = D.filter(function (r) { return r.marca === b; });
+          return { b:b, v:mean(rows.map(function (r) { return mean(dim.keys.map(function (k) { return r[k]; })); })) };
+        });
+        var row = document.createElement('div');
+        row.className = 'bar-row grouped';
+        row.innerHTML = '<div class="rlabel">' + esc(dim.name) + '</div><div class="rgroup">' +
+          subs.map(function (s) {
+            return '<div class="sub"><div class="bar-track"><div class="bar-fill" style="width:' +
+              (s.v / 5 * 100).toFixed(1) + '%;background:' + brandColor(s.b) + '"></div></div>' +
+              '<div class="rvalue tnum">' + fmt2(s.v) + '</div></div>';
+          }).join('') + '</div>';
+        el.appendChild(row);
+        Array.prototype.forEach.call(row.querySelectorAll('.bar-fill'), function (f, i) {
+          showTip(f, esc(subs[i].b) + ' · ' + esc(dim.name) + '<span class="tt-sub">Promedio: ' + fmt2(subs[i].v) + ' / 5</span>');
+        });
+      });
+    })();
+
+    // Ítems
+    (function () {
+      var el = document.getElementById('chart-items');
+      var items = ITEM_DEFS.map(function (d) {
+        var o = { label:d.label, overall:mean(D.map(function (r) { return r[d.key]; })) };
+        brands.forEach(function (b) {
+          o[b] = mean(D.filter(function (r) { return r.marca === b; }).map(function (r) { return r[d.key]; }));
+        });
+        return o;
+      }).sort(function (a, b) { return a.overall - b.overall; });
+
+      items.forEach(function (it, idx) {
+        var row = document.createElement('div');
+        row.className = 'bar-row';
+        var color = idx === 0 ? css('--warning') : css('--neutral-bar');
+        row.innerHTML = '<div class="rlabel">' + esc(it.label) + '</div>' +
+          '<div class="bar-track"><div class="bar-fill" style="width:' + (it.overall / 5 * 100).toFixed(1) + '%;background:' + color + '"></div></div>' +
+          '<div class="rvalue tnum">' + fmt2(it.overall) + '</div>';
+        el.appendChild(row);
+        showTip(row.querySelector('.bar-fill'), esc(it.label) +
+          '<span class="tt-sub">General ' + fmt2(it.overall) + ' · ' +
+          esc(brands.map(function (b) { return b + ' ' + fmt2(it[b]); }).join(' · ')) + '</span>');
+      });
+    })();
+
+    // Preparación
+    (function () {
+      var el = document.getElementById('chart-prep');
+      var ramp = [css('--seq-1'), css('--seq-2'), css('--seq-3'), css('--seq-4'), css('--seq-5')];
+      var otros = uniq(D.map(function (r) { return r.q7; })).filter(function (l) { return PREP_LABELS.indexOf(l) === -1; });
+      var escala = PREP_LABELS.concat(otros);
+      function colorDe(i) { return i < 5 ? ramp[i] : css('--muted'); }
+
+      var presentes = escala.map(function (l, i) {
+        return { label:l, i:i, total:D.filter(function (r) { return r.q7 === l; }).length };
+      }).filter(function (p) { return p.total > 0; });
+
+      var leg = document.createElement('div');
+      leg.className = 'legend';
+      leg.innerHTML = presentes.map(function (p) {
+        return '<span class="legend-item"><span class="swatch" style="background:' + colorDe(p.i) + '"></span>' +
+          esc(p.label) + (p.i >= 5 ? ' *' : '') + '</span>';
+      }).join('');
+      el.appendChild(leg);
+
+      brands.forEach(function (b) {
+        var rows = D.filter(function (r) { return r.marca === b; });
+        var row = document.createElement('div');
+        row.className = 'stack-row';
+        row.innerHTML = '<div class="slabel"><span>' + esc(b) + '</span><span class="n">n = ' + rows.length + '</span></div><div class="stack-track"></div>';
+        var track = row.querySelector('.stack-track');
+        escala.forEach(function (l, i) {
+          var c = rows.filter(function (r) { return r.q7 === l; }).length;
+          if (!c) return;
+          var pct = c / rows.length * 100;
+          var seg = document.createElement('div');
+          seg.className = 'stack-seg';
+          seg.style.width = pct + '%';
+          seg.style.background = colorDe(i);
+          track.appendChild(seg);
+          showTip(seg, esc(l) + '<span class="tt-sub">' + esc(b) + ' · ' + c + ' docentes · ' + fmt1(pct) + '%</span>');
+        });
+        el.appendChild(row);
+      });
+      if (otros.length) {
+        el.insertAdjacentHTML('beforeend',
+          '<p class="lown" style="margin-top:10px;">* «' + esc(otros.join('», «')) +
+          '» no corresponde a las opciones de la escala; probable error de tipeo en el formulario. Se muestra aparte sin reasignarlo.</p>');
+      }
+    })();
+
+    // Histograma
+    (function () {
+      var el = document.getElementById('chart-hist');
+      var dist = [];
+      for (var i = 0; i <= 10; i++) dist.push(D.filter(function (r) { return r.q8 === i; }).length);
+      var max = Math.max.apply(null, dist);
+      var hist = document.createElement('div');
+      hist.className = 'hist';
+      dist.forEach(function (v, score) {
+        var col = document.createElement('div');
+        col.className = 'hist-col';
+        var h = max ? Math.max(v / max * 100, v > 0 ? 4 : 0) : 0;
+        var bg = score <= 6 ? css('--critical') : (score <= 8 ? css('--warning') : css('--good'));
+        col.innerHTML = '<div class="hist-bar" style="height:' + h + '%;background:' + bg + '"></div><div class="hist-x">' + score + '</div>';
+        hist.appendChild(col);
+        showTip(col.querySelector('.hist-bar'), 'Puntaje ' + score + '<span class="tt-sub">' + v + ' docente' + (v === 1 ? '' : 's') + '</span>');
+      });
+      el.appendChild(hist);
+    })();
+
+    // Condición docente
+    (function () {
+      var el = document.getElementById('cond-stats');
+      ['Soy Docente Nuevo','Soy Docente Continuador'].forEach(function (label) {
+        var rows = D.filter(function (r) { return r.cond === label; });
+        var cell = document.createElement('div');
+        cell.className = 'cell';
+        if (!rows.length) {
+          cell.style.opacity = '0.5';
+          cell.innerHTML = '<div class="k">' + esc(label) + '</div><div class="v tnum">–</div><div class="v2">Sin respuestas en este filtro</div>';
+        } else {
+          var d = npsOf(rows.map(function (r) { return r.q8; }));
+          cell.innerHTML = '<div class="k">' + esc(label) + '</div>' +
+            '<div class="v tnum">' + fmt2(mean(rows.map(function (r) { return r.prom; }))) +
+            ' <span style="font-size:12px;color:var(--muted);font-weight:500;">/ 5</span></div>' +
+            '<div class="v2 tnum">n = ' + rows.length + ' · nota media ' + fmt1(d.avg) + ' · NPS ' + fmt1(d.score) + '</div>';
+        }
+        el.appendChild(cell);
+      });
+    })();
+
+    // Temas
+    (function () {
+      var el = document.getElementById('chart-temas');
+      var arr = temasDe(D).slice(0, 10);
+      if (!arr.length) { el.innerHTML = '<div class="empty">Sin menciones de temas para este filtro.</div>'; return; }
+      var max = arr[0].n;
+      arr.forEach(function (t) {
+        var row = document.createElement('div');
+        row.className = 'bar-row';
+        row.innerHTML = '<div class="rlabel">' + esc(t.tema) + '</div>' +
+          '<div class="bar-track"><div class="bar-fill" style="width:' + (t.n / max * 100).toFixed(1) + '%;background:' + css('--neutral-bar') + '"></div></div>' +
+          '<div class="rvalue tnum">' + t.n + '</div>';
+        el.appendChild(row);
+        showTip(row.querySelector('.bar-fill'), esc(t.tema) + '<span class="tt-sub">' + t.n + ' mención' + (t.n === 1 ? '' : 'es') + '</span>');
+      });
+    })();
+
+    (function () {
+      var el = document.getElementById('temas-por-marca');
+      var grid = document.createElement('div');
+      grid.className = 'grid-3';
+      grid.style.gridTemplateColumns = brands.length > 1 ? '1fr 1fr' : '1fr';
+      grid.style.gap = '16px';
+      brands.forEach(function (b) {
+        var arr = temasDe(D.filter(function (r) { return r.marca === b; })).slice(0, 5);
+        var box = document.createElement('div');
+        box.innerHTML = '<div class="legend-item" style="margin-bottom:8px;"><span class="swatch" style="background:' + brandColor(b) + '"></span>' + esc(b) + '</div>' +
+          (arr.length
+            ? '<ol style="margin:0;padding-left:18px;color:var(--ink-2);font-size:12.5px;">' +
+              arr.map(function (t) { return '<li style="margin-bottom:5px;">' + esc(t.tema) + ' <span class="tnum" style="color:var(--muted)">(' + t.n + ')</span></li>'; }).join('') + '</ol>'
+            : '<p class="brandless">Sin menciones registradas.</p>');
+        grid.appendChild(box);
+      });
+      el.appendChild(grid);
+    })();
+
+    // Tabla supervisores
+    (function () {
+      var tbody = document.querySelector('#tabla-capacitadores tbody');
+      var map = {};
+      D.forEach(function (r) {
+        var k = r.cap + '|' + r.marca + '|' + r.sede;
+        if (!map[k]) map[k] = { Capacitador:r.cap, Marca:r.marca, Sede:r.sede, rows:[] };
+        map[k].rows.push(r);
+      });
+      Object.keys(map).map(function (k) {
+        var g = map[k], d = npsOf(g.rows.map(function (r) { return r.q8; }));
+        return { Capacitador:g.Capacitador, Marca:g.Marca, Sede:g.Sede, n:g.rows.length,
+                 promedio:mean(g.rows.map(function (r) { return r.prom; })), nps_avg:d.avg };
+      }).sort(function (a, b) {
+        return a.Capacitador.localeCompare(b.Capacitador, 'es') || a.Marca.localeCompare(b.Marca, 'es');
+      }).forEach(function (r) {
+        var tr = document.createElement('tr');
+        if (r.n < 3) tr.style.opacity = '0.55';
+        var cls = r.promedio < 3.8 ? 'score-bad' : (r.promedio < 4.1 ? 'score-warn' : 'score-good');
+        tr.innerHTML =
+          '<td>' + esc(r.Capacitador) + '</td>' +
+          '<td><span class="brand-pill"><span class="dot" style="background:' + brandColor(r.Marca) + '"></span>' + esc(r.Marca) + '</span></td>' +
+          '<td>' + esc(r.Sede) + '</td>' +
+          '<td class="num tnum">' + r.n + (r.n < 3 ? ' *' : '') + '</td>' +
+          '<td class="num"><span class="score-pill ' + cls + ' tnum">' + fmt2(r.promedio) + '</span></td>' +
+          '<td class="num tnum">' + fmt2(r.nps_avg) + '</td>';
+        tbody.appendChild(tr);
+      });
+    })();
+
+    // Grupos por supervisor (para hallazgos y recomendaciones)
+    var grupos = {};
+    D.forEach(function (r) {
+      var k = r.cap + '|' + r.sede;
+      if (!grupos[k]) grupos[k] = { cap:r.cap, sede:r.sede, rows:[] };
+      grupos[k].rows.push(r);
+    });
+    var confiables = Object.keys(grupos).map(function (k) {
+      var g = grupos[k];
+      return { cap:g.cap, sede:g.sede, n:g.rows.length,
+               prom:mean(g.rows.map(function (r) { return r.prom; })),
+               nps:npsOf(g.rows.map(function (r) { return r.q8; })).score };
+    }).filter(function (g) { return g.n >= 3; }).sort(function (a, b) { return b.prom - a.prom; });
+
+    var itemsOrd = ITEM_DEFS.map(function (d) {
+      return { label:d.label, v:mean(D.map(function (r) { return r[d.key]; })) };
+    }).sort(function (a, b) { return a.v - b.v; });
+    var debil = itemsOrd[0], fuerte = itemsOrd[itemsOrd.length - 1];
+    var dets = D.filter(function (r) { return r.q8 <= 6; });
+    var sedesDet = uniq(dets.map(function (r) { return r.sede; })).filter(Boolean);
+    var temasTop = temasDe(D).slice(0, 3);
+
+    // Hallazgos
+    (function () {
+      var el = document.getElementById('hallazgos');
+      var p1 = '<p>La bienvenida docente obtiene una <strong>satisfacción promedio de ' + fmt2(promGeneral) +
+        ' sobre 5</strong> y un <strong>NPS de ' + fmt1(npsTotal.score) + '</strong>, con ' + npsTotal.promotores +
+        ' promotores, ' + npsTotal.pasivos + ' pasivos y ' + npsTotal.detractores + ' detractor' +
+        (npsTotal.detractores === 1 ? '' : 'es') + ' sobre ' + D.length + ' respuestas. <strong>' + fmt1(prepPct) +
+        '% de los docentes</strong> se declara preparado o muy preparado para iniciar el periodo.';
+      if (brands.length > 1) {
+        var porMarca = brands.map(function (b) {
+          var sub = D.filter(function (r) { return r.marca === b; });
+          return { b:b, prom:mean(sub.map(function (r) { return r.prom; })), nps:npsOf(sub.map(function (r) { return r.q8; })).score, n:sub.length };
+        }).sort(function (a, b) { return b.nps - a.nps; });
+        p1 += ' Entre marcas, <strong>' + esc(porMarca[0].b) + '</strong> encabeza con NPS ' + fmt1(porMarca[0].nps) +
+          ' (promedio ' + fmt2(porMarca[0].prom) + ', n = ' + porMarca[0].n + ') frente a <strong>' +
+          esc(porMarca[porMarca.length - 1].b) + '</strong> con NPS ' + fmt1(porMarca[porMarca.length - 1].nps) +
+          ' (promedio ' + fmt2(porMarca[porMarca.length - 1].prom) + ', n = ' + porMarca[porMarca.length - 1].n + ').';
+      }
+      p1 += '</p>';
+
+      var p2 = '<p>El punto más débil de la encuesta es <strong>«' + esc(debil.label) + '»</strong> (' + fmt2(debil.v) +
+        '/5), frente al ítem mejor valorado, «' + esc(fuerte.label) + '» (' + fmt2(fuerte.v) + '/5): una brecha de ' +
+        fmt2(fuerte.v - debil.v) + ' puntos. ' +
+        (dets.length
+          ? 'Los <strong>' + dets.length + ' detractor' + (dets.length === 1 ? '' : 'es') + '</strong> (' +
+            fmt1(dets.length / D.length * 100) + '% del total) se concentran en ' + esc(sedesDet.join(', ')) +
+            ', donde conviene revisar qué ocurrió en esas sesiones.'
+          : 'No se registran detractores en este corte.') + '</p>';
+
+      var p3;
+      if (confiables.length > 1) {
+        var top = confiables[0], bot = confiables[confiables.length - 1];
+        p3 = '<p>Entre los supervisores con muestra suficiente (n≥3), <strong>' + esc(top.cap) + '</strong> (' + esc(top.sede) +
+          ', n = ' + top.n + ') lidera con promedio ' + fmt2(top.prom) + ' y NPS ' + fmt1(top.nps) + ', mientras <strong>' +
+          esc(bot.cap) + '</strong> (' + esc(bot.sede) + ', n = ' + bot.n + ') queda en ' + fmt2(bot.prom) +
+          ' con NPS ' + fmt1(bot.nps) + '. ';
+      } else { p3 = '<p>'; }
+      p3 += 'Los temas más solicitados para reforzar son ' +
+        (temasTop.length ? temasTop.map(function (t) { return '<strong>' + esc(t.tema) + '</strong> (' + t.n + ')'; }).join(', ') : 'ninguno en particular') + '.</p>';
+
+      el.innerHTML = p1 + p2 + p3;
+    })();
+
+    // Recomendaciones
+    (function () {
+      var el = document.getElementById('recomendaciones');
+      var recs = [];
+      recs.push({ t:'Reforzar «' + debil.label.toLowerCase() + '»',
+        p:'Es el ítem con menor puntaje de la encuesta (' + fmt2(debil.v) + '/5). Ajustar el formato de la sesión en ese punto concreto es la intervención de mayor retorno.', prio:'Alta' });
+
+      if (dets.length) {
+        recs.push({ t:'Contactar a los ' + dets.length + ' detractor' + (dets.length === 1 ? '' : 'es'),
+          p:'Calificaron 0–6 en recomendación' + (sedesDet.length ? ' (' + sedesDet.join(', ') + ')' : '') +
+            '. Un contacto directo permite entender la causa antes del próximo cierre de encuesta.', prio:'Alta' });
+      }
+      if (temasTop.length) {
+        recs.push({ t:'Agenda de refuerzo: ' + temasTop.slice(0, 2).map(function (t) { return t.tema.toLowerCase(); }).join(' y '),
+          p:'Son los temas más pedidos en las respuestas abiertas. Conviene cubrirlos con microcápsulas o una sesión breve antes del inicio de clases.', prio:'Media' });
+      }
+      if (brands.length > 1) {
+        var pm = brands.map(function (b) {
+          var sub = D.filter(function (r) { return r.marca === b; });
+          return { b:b, nps:npsOf(sub.map(function (r) { return r.q8; })).score };
+        }).sort(function (a, b) { return b.nps - a.nps; });
+        if (pm[0].nps - pm[pm.length - 1].nps >= 10) {
+          recs.push({ t:'Cerrar la brecha de ' + pm[pm.length - 1].b,
+            p:'Su NPS (' + fmt1(pm[pm.length - 1].nps) + ') queda por debajo de ' + pm[0].b + ' (' + fmt1(pm[0].nps) +
+              '). Revisar el formato de la bienvenida en esa marca y sus sedes con más detractores.', prio:'Alta' });
+        }
+      }
+      if (confiables.length > 1) {
+        var t0 = confiables[0], tN = confiables[confiables.length - 1];
+        recs.push({ t:'Replicar el método de ' + t0.cap,
+          p:'Con promedio ' + fmt2(t0.prom) + ' y NPS ' + fmt1(t0.nps) + ' en ' + t0.sede +
+            ', es la sesión mejor evaluada del corte. Documentar qué hace distinto y extenderlo al resto de sedes.', prio:'Media' });
+        if (tN.prom < t0.prom - 0.2) {
+          recs.push({ t:'Acompañar a ' + tN.cap,
+            p:'Promedio ' + fmt2(tN.prom) + ' y NPS ' + fmt1(tN.nps) + ' en ' + tN.sede +
+              ', por debajo del resto del grupo con muestra suficiente. Sesión de acompañamiento antes de la próxima bienvenida.', prio:'Media' });
+        }
+      }
+      var nuevos = D.filter(function (r) { return r.cond === 'Soy Docente Nuevo'; });
+      if (nuevos.length && nuevos.length < D.length * 0.15) {
+        recs.push({ t:'Ampliar la cobertura en docentes nuevos',
+          p:'Solo ' + nuevos.length + ' de ' + D.length + ' respuestas provienen de docentes nuevos, insuficiente para evaluar si la inducción los prepara bien. Reforzar el recordatorio de llenado en ese grupo.', prio:'Media' });
+      }
+      var pocos = Object.keys(grupos).filter(function (k) { return grupos[k].rows.length < 3; }).length;
+      if (pocos) {
+        recs.push({ t:'Ampliar la muestra en ' + pocos + ' grupo' + (pocos === 1 ? '' : 's'),
+          p:'Hay supervisores con menos de 3 respuestas, insuficiente para evaluar su desempeño. Reforzar el recordatorio de llenado del formulario en esas sedes.', prio:'Media' });
+      }
+
+      el.innerHTML = recs.map(function (r) {
+        return '<div class="rec-card"><div class="rec-head"><h4>' + esc(r.t) + '</h4>' +
+          '<span class="prio prio-' + (r.prio === 'Alta' ? 'alta' : 'media') + '">' + r.prio + '</span></div>' +
+          '<p>' + esc(r.p) + '</p></div>';
+      }).join('');
+    })();
+  }
+
+  // ===================================================================
+  // Arranque
+  // ===================================================================
+  poblarFiltros();
+  run();
+  sello('Conectando con la hoja publicada…');
+  if (AUTO_AL_ABRIR) actualizar(true);
+})();
 </script>
-</body>
-</html>
