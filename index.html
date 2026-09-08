@@ -157,6 +157,9 @@
     gap: 12px;
     margin-bottom: 22px;
   }
+  @media (min-width: 1120px) {
+    .kpi-grid.kpi-grid-5 { grid-template-columns: repeat(5, 1fr); }
+  }
   .kpi {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -377,7 +380,12 @@
   </div>
 
   <!-- KPI STRIP -->
-  <div class="kpi-grid">
+  <div class="kpi-grid kpi-grid-5">
+    <div class="kpi">
+      <span class="label">Total de encuestas registradas</span>
+      <span class="value tnum" id="kpi-total">–</span>
+      <span class="delta" id="kpi-total-split">–</span>
+    </div>
     <div class="kpi">
       <span class="label">Promedio general</span>
       <span class="value tnum" id="kpi-promedio">–</span>
@@ -966,8 +974,8 @@
       });
       document.querySelector('#tabla-capacitadores tbody').innerHTML =
         '<tr><td colspan="6" class="empty">No hay respuestas para este filtro.</td></tr>';
-      ['kpi-promedio','kpi-nps','kpi-det','kpi-prep'].forEach(function (id) { document.getElementById(id).textContent = '–'; });
-      ['kpi-prom-split','kpi-nps-split'].forEach(function (id) { document.getElementById(id).textContent = ''; });
+      ['kpi-promedio','kpi-nps','kpi-det','kpi-prep','kpi-total'].forEach(function (id) { document.getElementById(id).textContent = '–'; });
+      ['kpi-prom-split','kpi-nps-split','kpi-total-split'].forEach(function (id) { document.getElementById(id).textContent = ''; });
       document.getElementById('kpi-det-pct').textContent = '–';
       document.getElementById('kpi-prep-not').textContent = '–';
       return;
@@ -979,10 +987,16 @@
     var prepOk = D.filter(function (r) { return /^(muy )?preparado/i.test(sinAcentos(r.q7)); }).length;
     var prepPct = prepOk / D.length * 100;
 
+    document.getElementById('kpi-total').textContent = D.length;
+    document.getElementById('kpi-total-split').innerHTML = brands.map(function (b) {
+      var n = D.filter(function (r) { return r.marca === b; }).length;
+      return esc(b) + ' <b class="tnum">' + n + '</b>';
+    }).join(' · ');
+
     document.getElementById('kpi-promedio').textContent = fmt2(promGeneral);
     document.getElementById('kpi-prom-split').innerHTML = brands.map(function (b) {
       var sub = D.filter(function (r) { return r.marca === b; });
-      return b + ' <b class="tnum">' + fmt2(mean(sub.map(function (r) { return r.prom; }))) + '</b>';
+      return b + ' <b class="tnum">' + fmt2(mean(sub.map(function (r) { return r.prom; }))) + '</b> (n=' + sub.length + ')';
     }).join(' · ');
 
     document.getElementById('kpi-nps').textContent = fmt1(npsTotal.score);
